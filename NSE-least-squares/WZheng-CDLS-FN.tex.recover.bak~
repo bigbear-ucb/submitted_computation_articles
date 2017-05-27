@@ -1,0 +1,888 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\usepackage{color}
+\usepackage{amsmath,amsfonts,amssymb,esvect,ulem}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{cancel}
+\usepackage{epstopdf}
+\usepackage{subcaption}
+%\usepackage{kpfonts}
+%\usepackage{subfigure}
+\modulolinenumbers[5]
+
+\journal{Journal of Nuclear Science and Engineering}
+
+
+%\setlength\parindent{0pt} % Removes all indentation from paragraphs
+%\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{#1}}}
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+\newcommand{\px}{\frac{\partial}{\partial x}}
+\newcommand{\st}{\sigma_\mathrm{t}}
+\newcommand{\pxt}{\frac{\partial^2}{\partial x^2}}
+\newcommand{\stt}{\st^2}
+\newcommand{\dst}{\frac{\partial\st}{\partial x}}
+\newcommand{\ppz}{\partial_x}%{\frac{\partial}{\partial x}}
+\newcommand{\ppzt}{\frac{\partial^2}{\partial x^2}}
+\newcommand{\psii}[1]{\psi^\mathrm{inc}_\mathrm{{#1}}}
+\newcommand{\vp}[1]{\vec{\phi}^{({#1})}}
+\newcommand{\sn}{S$_N$}
+\newcommand{\pn}{P$_N$}
+\newcommand{\omen}{\ome\cdot\nabla}
+\newcommand{\dpsi}{\delta\psi}
+\newcommand{\pl}{\psi}
+\newcommand{\ps}{\psi'}
+\newcommand{\ve}[1]{\vec{{#1}}}
+
+\newcommand{\qsl}{\qs^\mathrm{LS}}
+\newcommand{\done}{{\mathcal{D}_\mathrm{1}}}
+\newcommand{\dtwo}{{\mathcal{D}_\mathrm{2}}}
+\newcommand{\pd}{{\partial\mathcal{D}}}
+\newcommand{\pdone}{{\mathcal{F}_\mathrm{1}}}
+\newcommand{\pdtwo}{{\mathcal{F}_\mathrm{2}}}
+\newcommand{\intli}[1]{\int\limits_{{#1}}}
+\newcommand{\ointli}[1]{\oint\limits_{{#1}}}
+
+\newcommand{\dii}{{\mathcal{D}_\mathrm{i}}}
+\newcommand{\djj}{{\mathcal{D}_\mathrm{j}}}
+\newcommand{\fij}{{\mathcal{F}_\mathrm{ij}}}
+\newcommand{\pdi}{{\partial\mathcal{D}_\mathrm{i}}}
+\newcommand{\pdj}{{\partial\mathcal{D}_\mathrm{j}}}
+
+\newcommand{\slim}[1]{\sum\limits_{\tiny#1}}
+\newcommand{\dint}{\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ }
+\newcommand{\nido}{\vec{n}_\mathrm{i}\cdot\ome}
+\newcommand{\absnido}{\left|\nido\right|}
+\newcommand{\ndo}{\vec{n}\cdot\ome}
+\newcommand{\absndo}{\left|\ndo\right|}
+
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\newcommand{\TAMU}{Texas A\&M University}
+\newcommand{\ddxcs}{\sigma(E'\to E,~\mu)}
+\newcommand{\sigt}{\sigma_\mathrm{t}}
+\newcommand{\sigs}{\sigma_\mathrm{s}}
+\newcommand{\siga}{\sigma_\mathrm{a}}
+\newcommand{\stone}{{\sigma_\mathrm{t1}}}
+\newcommand{\sttwo}{{\sigma_\mathrm{t2}}}
+\newcommand{\saone}{{\sigma_\mathrm{a1}}}
+\newcommand{\satwo}{{\sigma_\mathrm{a2}}}
+\newcommand{\sone}{{\mathcal{F}_\mathrm{1}}}
+\newcommand{\stwo}{{\mathcal{F}_\mathrm{2}}}
+\newcommand{\bone}{{\mathbf{B}_\mathrm{1}}}
+\newcommand{\btwo}{{\mathbf{B}_\mathrm{2}}}
+\newcommand{\gammal}{{{\mathcal{F}}_\mathrm{l}}}
+\newcommand{\gammar}{{{\mathcal{F}}_\mathrm{r}}}
+
+\newcommand{\need}[1]{{\color{red}{#1}}}
+\newcommand{\intd}{\int\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ }
+\newcommand{\qs}{q_\mathrm{s}}
+\newcommand{\ome}{\vv{\Omega}}
+\newcommand{\dome}{d\Omega}
+\newcommand{\psil}{\psi^\mathrm{LS}}
+\newcommand{\ji}{j^\mathrm{in}}
+\newcommand{\jo}{j^\mathrm{out}}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\rpd}{\right)_\mathcal{D}}
+\newcommand{\rpdi}{\right)_{\mathcal{D}_\mathrm{i}}}
+
+\newcommand{\lb}{\left<}
+\newcommand{\rbp}{\right>^+_\mathcal{\pd}}
+\newcommand{\rbm}{\right>^-_\mathcal{\pd}}
+\newcommand{\rb}{\right>_\mathcal{\pd}}
+\newcommand{\rbi}{\right>_{\partial\mathcal{D}_\mathrm{i}}}
+\newcommand{\nodo}{\vec{n}_1\cdot\ome}
+\newcommand{\ntdo}{\vec{n}_2\cdot\ome}
+\newcommand{\absnodo}{\left|\vec{n}_1\cdot\ome\right|}
+\newcommand{\absntdo}{\left|\vec{n}_2\cdot\ome\right|}
+
+%\newcommand{\vvv}[1]{\vec{\mkern0mu#1}}
+%\newcommand{\vvv}[1]{\vec{\mskip1mu#1}}
+\newcommand{\vvv}[1]{\vec{#1}}
+%\newcommand{\sb1}{\hat{\sigma}_\mathrm{b}}
+\begin{document}
+
+\begin{frontmatter}
+
+\title{An Accurate Globally Conservative Subdomain Discontinuous Least-squares Scheme for Solving Neutron Transport Problems}%The Transient P$_N$\ (\tp{N})\ Model: an Accurate P$_N$~Closure for Radiation Transport}
+%\tnotetext[mytitlenote]{Fully documented templates are available in the elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
+
+%% Group authors per affiliation:
+\author[mymainaddress]{Weixiong Zheng\corref{mycorrespondingauthor}}
+\cortext[mycorrespondingauthor]{Corresponding author}
+\ead{zwxne2010@gmail.com}
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Elsevier Inc}
+%\ead[url]{www.elsevier.com}
+
+\author[mymainaddress]{Ryan G. McClarren}
+\ead{rgm@tamu.edu}
+
+\author[mymainaddress]{Jim E. Morel}
+\ead{morel@tamu.edu}
+\address[mymainaddress]{Nuclear Engineering, \TAMU,~College Station, TX 77843-3133}
+
+\begin{abstract}
+	In this work, we present a subdomain discontinuous least-squares (SDLS) scheme for neutronics problems. Ordinary least-squares (LS) method is known to be erroneous in problems with material interfaces that have total cross section sharp changes on two sides. In addition, least-squares scheme is known not to be globally conservative in heterogeneous problems. In problems where global conservation is important, e.g. k-eigenvalue problems, conservative treatment must be applied. We, in this study, proposed a SDLS method that retains global conservation. Such a method resembles LS formulation in each subdomain without material interface and differs from LS that an additional least-squares interface term appears for each interface. Scalar flux is continuous in each subdomain with continuous finite element method (CFEM) while discontinuous on interfaces for every pair of contiguous subdomains.
+\end{abstract}
+
+\begin{keyword}
+	Global conservation; least-squares; discrete ordinates
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+Neutral particle transport problems are governed by a first-order, hyperbolic equation.  As a result particle transport problems, especially those that are streaming dominated, can have discontinuous solutions. Such problems require spatial discretizations that allow for discontinuities in space.  Moreover, in regions where there is a strong scattering, discontinuous finite elements have been shown to properly preserve the asymptotic diffusion limit of the transport equation \cite{adams2001discontinuous}.  These two facts have led to discontinuous Galerkin finite elements being widely used in transport calculations. Nevertheless, the discontinuous finite element methods have more degrees of freedom than their continuous counterparts, especially in 3-D. 
+
+Another approach to solving transport problems involves forming a second-order transport operator, and solving the resulting equations using continuous finite elements. Second-order transport problems based on the parity of the equations and the self-adjoint angular flux (SAAF) equation are well-known\cite{morel_saaf,gesh_dissertation,gesh_mc,yunhuang_dissertation,zheng_dissertation}. The resulting equations are symmetric, but are ill-posed in void regions and ill-conditioned in near voids.  
+
+More recently, Hansen, et al.~\cite{Hansen:2015jq} derived a second-order form that is equivalent to minimizing the squared residual of the transport operator; it is therefore called the least-squares transport equation (LSTE).  This method can also be formed by multiplying the transport equation by the adjoint transport operator or by applying least-squares finite elements in space to the transport equation.  The resulting equations are well-posed in void and are symmetric positive definite. The least-squares method has previously been investigated  in the computational fluid dynamics (CFD) community for a long time\cite{bnjiang_l1,lowrie_l1,guermond_l1}. However, such the method generally has low accuracy in problems with interfaces between optically thin and thick materials without local refinement near the interface\cite{zheng_l1sn,zheng_l1pn,clifmc}. Additionally, the standard least-squares method does not have particle conservation (except in the limit as the number of zones goes to infinity), which is a problem in eigenvalue calculations for neutron transport in nuclear systems \cite{laboure:2016}, unless special iteration techniques are applied \cite{morel_holo}.
+
+In the process of deriving the least-squares equations, the symmetrization of the transport equation converts a hyperbolic equation to an elliptic equation and, in the process, loses causality. For example, the presence of a strong absorber downstream of a source can influence the solution upstream of the source. In remedying this deficiency, we have to add back in asymmetry to the operator, but do so in such a way that still preserves the positive properties of the least-squares method.
+
+To this end we develop a least-squares method that uses minimizes the square of the transport residual over certain regions of the entire problem domain.  In each of these subregions the interaction cross-sections are slowly varying functions of space. We allow the solution between these regions to be discontinuous. The resulting scheme is essentially solves least-squares independently in each subregion, and the regions are coupled through a sweep-like procedure. Furthermore, with the correct weighting in the least-squares procedure, we can construct a method that is globally conservative.
+
+The reminder of the paper is organized as follows: in Sec.\ \ref{s:cdls_derive},\ we propose a new method that is based on a least-squares formulation over contiguous blocks in the problem base on a novel subdomain-discontinuous functional. We also derive the corresponding weak formulations in this section. Next, we further theoretically demonstrate the method, unlike standard least-squares methods, retains conservation on both a global and subdomain sense. In Sec.\ \ref{s:numerics}, several numerical tests are presented to demonstrate conservation as well as the improved accuracy.
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+%
+%Particle transport phenomena, such as neutron transport, photon transport, etc, is described by the first order Boltzmann equation, which prevents the use of standard continuous finite element method (CFEM) to solve the transport equation without sophisticated stabilization techniques. A standard solving technique is to use discontinuous finite element method (DFEM),\ though it is blamed to have higher degrees of freedom (DoFs). The other path is to derive second order forms of transport equations, such as the well-known odd and even parity equations, such that CFEM can be employed.
+%
+%More recently, Hansen et al\ derived another second order method by multiplying transport residual by adjoint transport operator\cite{Hansen:2015jq}.\ In fact, one can show it can be derived from minimizing a unweighted squared transport residual and is therefore named least-squares transport equation (LSTE)\footnote{We do not differentiate using least-squares method solving transport equation from using finite element method solving LSTE since they are the same essentially. We use ``LS" as the unified name for both.}. The least-squares method has been investigated for solving first order partial differential equations (PDEs) in computation fluid dynamics (CFD) community for a long time. However, such a method generally has low accuracy in problems with thin-thick contact interface without local refinement on the interface\cite{zheng_l1sn,zheng_l1pn,clifmc}.\ In addition, it does not have particle conservation that a conservative low order acceleration must be applied when used in problems where global conservation is desired such as k-eigenvalue problems\cite{morel_holo}.
+%
+%A hypothesis about the low accuracy is the symmetrization of the streaming operator in the LS method breaks the causality of the particle transport. Usually, particle transport process is supposed to be determined by what occurs backward. However, the symmetrization of the streaming operator relates the particle causality in dual directions, i.e. both backwards and forwards. As a consequence, when a thin material is interfaced with a thick material, solution from LS discretization in thin material would be hugely distorted by thick material. A remedy to fix the loss of causality is to somehow recover the asymmetry of streaming operator on the material interfaces while keeping LS discretization in the rest part of the domain. 
+%
+%Ordinarily, the LS scheme can be derived from defining a functional over the whole domain minimizing squared transport residual. The the idea mentioned above is, yet, realized by defining individual functionals of transport residuals for different subdomains and defining interface least-squares functional to connect every pair of contiguous subdomains. In each subdomain, the cross section is a constant. Essentially, the resulting scheme is to solve regular LS independently in each subdomain divided from the whole LS domain transfer angular flux information between subdomains in a sweep-like way. Further, we prove that with delicately choosing the weight for interface functional, the scheme scheme is globally conservative in heterogeneous problems.
+
+
+%\section{Least-squares derivation of SAAF and LSTE}\label{s:derive}
+%\subsection{Derivation from least-squares functionals}
+%There are two typical ways of deriving a SAAF equation
+%
+%Yet, the SAAF equation can also be derived from minimizing a cross section weighted least-square residual functional.
+%
+%Define a least-square functional with scattering as the following: 
+%\begin{subequations}
+%\begin{equation}
+%\Gamma_0(\psi)=\int\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ \frac{1}{\st}(L\psi-q_\mathrm{s})^2.
+%\end{equation}
+%\begin{equation}
+%L\equiv\hat{\Omega}\cdot\nabla+\sigt,\quad q_\mathrm{s}=q+S\psi=q+\int\limits_{4\pi}d\Omega'\ \sigs(\Omega'\cdot\Omega)\psi(\Omega'),
+%\end{equation}
+%\end{subequations}
+%where $q$\ is directional volumetric source, $S$\ is the scattering operator and $\st$\ and $\sigs$\ are total and scattering cross sections, respectively.
+%
+%Minimizing such a functional is equivalent to finding a $\psi$\ in a function space such that with any function $v$\ in the same space, the following statement holds:
+%\begin{equation}
+%\Gamma_0(\psi)\leq\Gamma_0(\psi+\epsilon v), \forall\epsilon>0,
+%\end{equation}
+%which leads to finding a stationary point in the corresponding space:
+%\begin{equation}\label{e:origin}
+%\lim\limits_{\epsilon\to 0}\frac{\partial\Gamma_0}{\partial\epsilon}=\intd\frac{1}{\sigt}Lv(L\psi-\qs)=0.
+%\end{equation}
+%
+%To simplify the notations, we define the inner product for finite domain $\mathcal{D}$\ such that for generic functions $a$\ and $b$,\ we have:
+%\begin{equation}
+%(a,b)_\mathcal{D}=\intd ab
+%\end{equation}
+%
+%Before moving on, we provide a short proof for $\left(\frac{1}{\sigt}L\right)^\dagger=L^\dagger\frac{1}{\sigt}$\ based on the inner product. Given any two functions $f\ \mathrm{and}\ g$,\ we have:
+%\begin{align}\label{e:proof}
+%\left(\left(\frac{1}{\sigt}Lf\right),g\right)_\mathcal{D}-\left(f,\left(L^\dagger\frac{1}{\sigt}g\right)\right)_\mathcal{D}\\\nonumber
+%=\left(\left(\frac{1}{\sigt}\hat{\Omega}\cdot\nabla f+f\right),g\right)_\mathcal{D}-\left(f,\left(-\ome\cdot\nabla\frac{g}{\sigt}+g\right)\right)_\mathcal{D}
+%\end{align}
+%Note that
+%\begin{equation}\label{e:note}
+%\frac{1}{\sigt}(\ome\cdot\nabla f)g-f\left(-\ome\cdot\nabla\frac{g}{\sigt}\right)=\ome\cdot\nabla\left(f\frac{g}{\sigt}\right).
+%\end{equation}
+%Plug Eq.\ \eqref{e:note}\ back into Eq.\ \eqref{e:proof},\ we can use Gauss theorem and reach
+%\begin{equation}\label{e:adjoint}
+%\left(\left(\frac{1}{\sigt}Lf\right),g\right)_\mathcal{D}-\left(f,\left(L^\dagger\frac{1}{\sigt}g\right)\right)_\mathcal{D}=\intd\ome\cdot\nabla\left(f\frac{g}{\sigt}\right)=\int\limits_{4\pi}d\Omega\ \oint_{\partial D}ds\ \vec{n}\cdot\ome\frac{fg}{\st}.
+%\end{equation}
+%For finite medium, $\forall f$,\ requesting $g(\vec{r})=0,\vec{r}\in\partial D$\ results in
+%\begin{equation}
+%\left(\frac{1}{\sigt}Lf,g\right)_\mathcal{D}=\left(f,L^\dagger\frac{1}{\sigt}g\right)_\mathcal{D},
+%\end{equation}
+%therefore,
+%\begin{equation}
+%\left(\frac{1}{\sigt}L\right)^\dagger=L^\dagger\frac{1}{\sigt}
+%\end{equation}
+%
+%Combine Eqs.\ \eqref{e:origin}\ and \eqref{e:adjoint},\ one shall see
+%\begin{equation}
+%\left(v,L^\dagger\frac{1}{\sigt}(L\psi-\qs)\right)_\mathcal{D}+\int\limits_{4\pi}d\Omega\ \oint_{\partial D}\ ds\vec{n}\cdot\ome v(L\psi-\qs)=0.
+%\end{equation}
+%Assuming transport equation is fulfilled on the domain boundary, then the equation above will be simplified that only interior part remains:
+%\begin{equation}\label{e:vari_final}
+%\left(v,L^\dagger\frac{1}{\sigt}(L\psi-\qs)\right)_\mathcal{D}=0.
+%\end{equation}
+%Since Eq.\ \eqref{e:vari_final}\ holds for any $v$,\ we can then gain the SAAF equation
+%\begin{equation}
+%L^\dagger\frac{1}{\st}L\psi=L^\dagger\frac{\qs}{\st},
+%\end{equation}
+%We refer this form as to operator form of SAAF equation. Or equivalently after expanding $L^\dagger$\ and $L$\ and rearranging terms, we retains the conventional form of SAAF equation
+%%\begin{equation}
+%%-\ome\cdot\nabla\frac{1}{\sigt}\ome\cdot\nabla\psi+\sigt\psi+\ome\cdot\nabla\qs-\qs=0,
+%%\end{equation}
+%%or equivalently,
+%\begin{equation}\label{e:saaf}
+%-\ome\cdot\nabla\frac{1}{\sigt}\ome\cdot\nabla\psi+\sigt\psi=\qs-\ome\cdot\nabla\frac{\qs}{\st}
+%\end{equation}
+%
+%Similarly, the LSTE can be derived in a rather close way.\ The governing equation is expressed as\cite{Hansen:2015jq}:
+%\begin{equation}
+%L^\dagger L\psi=L^\dagger(S\psi+q)
+%\end{equation}
+%We refer this form of LSTE as to the operator form. Or equivalently, we approach the conventional LSTE after expanding the (adjoint) transport operators:
+%\begin{equation}\label{e:lste}
+%-\ome\cdot\nabla\ome\cdot\nabla\psi+\st^2\psi-(\ome\cdot\nabla\st)\psi=\st\qs-\omen\qs
+%\end{equation}
+%\subsection{Equivalences}
+%The derivation in Section\ \ref{s:derive}\ has not been designated any discrete approximation in both angle and space. Factually, it is rather straightforward to demonstrate that 
+%\begin{enumerate}
+%\item Using least-squares finite element method (LSFEM)\ to solve transport equation is on par with solving CFEM-LSTE.
+%\item Using $1/\st$\ weighted LSFEM ($1/\st$-LSFEM)\ to solve transport equation is equivalent to solving CFEM-.
+%\end{enumerate}
+%
+%Let us define two boundary integrations using generic functions $a$\ and $b$\ on a surface $\mathcal{F}$:
+%\begin{equation}
+%<a,b>^+_{\mathcal{F}}=\intli{\mathcal{F}}ds\ \intli{\ndo>0}d\Omega\ |\ndo|ab,
+%\end{equation}
+%\begin{equation}
+%<a,b>^-_{\mathcal{F}}=\intli{\mathcal{F}}ds\ \intli{\ndo<0}d\Omega\ |\ndo|ab,
+%\end{equation}
+%and
+%\begin{equation}
+%<a,b>_{\mathcal{F}}=\intli{\mathcal{F}}ds\ \intli{4\pi}d\Omega\ \ndo ab=<a,b>^+_\mathcal{F}-<a,b>^-_\mathcal{F},
+%\end{equation}
+%\subsubsection{LSFEM vs. CFEM-LSTE}\label{s:lste}
+%Solving transport equation using LSFEM is to utilize the symmetrization of streaming operator such that continuous basis can be used. It starts off defining a functional in polynomial function space $\mathcal{V}$:
+%\begin{equation}
+%\Gamma_\mathrm{LS}=\frac{1}{2}\intli{4\pi}d\Omega \intli{\mathcal{D}}dV\ (L\psi-\qs)^2+\frac{1}{2}\intli{4\pi}d\Omega \ointli{\partial\mathcal{D}}ds\ |\ndo|\st\left(\psi-\psii{}\right)^2
+%\end{equation}
+%To minimize $\Gamma_\mathrm{LS}$,\ it is equivalent to find $\psi\in\mathcal{V}$,\ $\forall\ v\in\mathcal{V}$\ such that
+%\begin{equation}
+%\left(Lv,L\psi-\qs\right)_\mathcal{D}+\left<\st v,\psi-\psii{}\right>^-_\pd=0
+%\end{equation}
+%Expand $L$,\ then we will see
+%\begin{align}
+%\lp\omen v,\omen\psi\rpd+\lp\st v,\omen\psi\rpd+\lp\omen v,\st\psi\rpd\\\nonumber
+%+\lp\st v,\st\psi\rpd-\lp\omen v+\st v,\qs\rpd+\left<\st v,\psi-\psii{}\right>^-_\pd=0.\\\nonumber
+%\end{align}
+%
+%the other hand, with the same way we imposing boundary condition above, CFEM-LSTE with boundary  is find $\psi\in\mathcal{V}$,\ such that for any $v\in\mathcal{V}$:
+%\begin{align}
+%\left(v,-\omen\omen\psi+\st^2\psi-(\omen\st)\psi-\st\qs+\omen\qs\rpd+\left<v,\psi-\psii{}\right>^-_\pd\\\nonumber
+%=\lp\omen v,\omen\psi\rpd+\lp\st v,\st\psi\rpd-\lp v,(\omen\st)\psi\rpd\\\nonumber
+%-\lp\omen v+\st v,\qs\rpd-\lb v,\qs-\omen\psi\rb+\left<\st v,\psi-\psii{}\right>^-_\pd=0
+%\end{align}
+%Perform the integration by part, require transport equation is fulfilled on the boundary, so that:
+%\begin{align}
+%\qs-\omen\psi=\st\psi
+%\end{align}
+%and recognize
+%\begin{align}
+%-\lp v,(\omen\st)\psi\rpd=&-\lp(\omen\st)v,\psi\rpd\\\nonumber
+%=\lp\st v,\omen\psi\rpd+\lp\st\omen v,\psi\rpd-&\lb\st v,\psi\rbp+\lb\st v,\psi\rbm\\\nonumber
+%\end{align}
+%then we will approach
+%\begin{align}
+%\lp\omen v,\omen\psi\rpd+\lp\st v,\omen\psi\rpd+\lp\omen v,\st\psi\rpd\\\nonumber
+%+\lp\st v,\st\psi\rpd-\lp\omen v+\st v,\qs\rpd+\left<\st v,\psi-\psii{}\right>^-_\pd=0,\\\nonumber
+%\end{align}
+%which is identical to LSFEM solving transport equations.
+%
+%\subsubsection{$1/\st$-LSFEM vs. CFEM-SAAF}
+%Similar to Sec.\ \ref{s:lste}\ we start off defining a least-squares functional
+%\begin{align}
+%\Gamma_\mathrm{1/\st-LS}=\frac{1}{2}\intli{4\pi}d\Omega \intli{\mathcal{D}}dV\ \frac{1}{\st}(L\psi-\qs)^2+\frac{1}{2}\intli{4\pi}d\Omega \ointli{\partial\mathcal{D}}ds\ |\ndo|\left(\psi-\psii{}\right)^2.
+%\end{align}
+%To minimize $\Gamma_\mathrm{1/\st-LS}$,\ it is equivalent to finding $\psi\in\mathcal{V}$,\ $\forall\ v\in\mathcal{V}$\ such that
+%\begin{equation}
+%\left(\frac{1}{\st}Lv,L\psi-\qs\right)_\mathcal{D}+\left<v,\psi-\psii{}\right>^-_\pd=0.
+%\end{equation}
+%Expand $L$\ and note that $\lp\omen v,\psi\rpd=-\lp v,\omen\psi\rpd+\lb v,\psi\rb$,\ we shall have:
+%\begin{align}
+%&\lp\frac{1}{\st}\omen v,\omen\psi\rpd+\lp\st v,\psi\rpd+\lp\frac{1}{\st}\omen v,\st\psi\rpd\\\nonumber
+%&-\lp\st v+\omen v,\frac{\qs}{\st}\rpd+\lp\frac{1}{\st}\st v,\omen \psi\rpd+\left<v,\psi-\psii{}\right>^-_\pd\\\nonumber
+%&=\lp\frac{1}{\st}\omen v,\omen\psi\rpd+\lp\st v,\psi\rpd-\lp\st v+\omen v,\frac{\qs}{\st}\rpd+\lb v,\psi\rb+\left<v,\psi-\psii{}\right>^-_\pd=0,\\\nonumber
+%\end{align}
+%i.e.,
+%\begin{align}
+%\lp\frac{1}{\st}\omen v,\omen\psi\rpd+\lp\st v,\psi\rpd-\lp\st v+\omen v,\frac{\qs}{\st}\rpd\\\nonumber
+%+\lb v,\psi\rbp-\left<v,\psii{}\right>^-_\pd=0,
+%\end{align}
+%which is identical to CFEM-SAAF formulation\cite{yaqi_physor16}
+%\begin{multline}\label{func4}
+%\frac{\partial J}{\partial\psii{N}}=(N+1)
+%\frac{\partial}{\partial\psii{N}}\left[\frac{\partial}{\partial x}\psii{N}\right]
+%\left(\frac{1}{v}\partial_t\phi_{N+1}+\frac{N+1}{2N+3}\frac{\partial\phi_{N}}{\partial x}\right.\\
+%\left.+\sigma_{t}\phi_{N+1}+\frac{N+2}{2N+3}\frac{\partial\phi_{N+2}}{\partial x}\right).
+%\end{multline}
+
+%\subsection{Equivalence between SAAF and LSTE in homogeneous problem}
+
+%\subsection{Difference between least-squares and weighted least-squares}
+%%\section{Extra error characterization of least square transport equation} %Boundary conditions and 
+%Generally speaking, in heterogeneous problems where total cross section become discontinuous between different part of problems, SAAF equation presents more accurate solution than LSTE. Denote the solutions of SAAF and LSTE equations by $\psi$\ and $\psil$,\ respectively. Assume $\psi=\psil+\dpsi$,\ then the LSTE would be re-presented as
+%\begin{subequations}
+%\begin{equation}\label{e:nls}
+%-\ome\cdot\nabla\ome\cdot\nabla(\psi+\dpsi)+\st^2(\psi+\dpsi)-(\ome\cdot\nabla\st)(\psi+\dpsi)=\st\qsl-\omen\qsl
+%\end{equation}
+%\begin{equation}
+%\qsl=q+\frac{\sigs\phi^\mathrm{LS}}{4\pi}\quad\mathrm{and}\quad\phi^\mathrm{LS}=\int_{4\pi}d\Omega\ (\psi+\dpsi)
+%\end{equation}
+%\end{subequations}
+%Perform the operation that $\st\times$\eqref{e:saaf}-\eqref{e:nls} and omit the lengthy derivations, one achieves:
+%\begin{equation}
+%
+%\end{equation}
+\section{Revisit least-squares discretization of transport equation}
+\subsection{One group transport equation}
+We will consider steady, energy-independent transport problems with isotropic scattering in this work.  The complications of energy dependence and anisotropic scattering can be readily incorporated into our method. The steady transport equation used to describe neutral particles of a single speed is expressed in operator form as:
+\begin{subequations}\label{e:te}
+\begin{equation}
+L\psi=\qs,
+\end{equation}
+where the streaming and removal operator is
+\begin{equation}
+L=\omen(\cdot)+\st,\quad\mathrm{and}\quad\qs=S\psi+q(\ve{r},\ome).
+\end{equation}
+\end{subequations}
+In these equations $\psi(\ve{r},\ome)$ is the angular flux of neutrons with units of particles per unit area per unit time, where $\ve{r} \in \mathbb{R}^3$ and $\ome \in \mathbb{S}_2$ is a point on the unit sphere representing a direction of travel for the particles. $S$ is the scattering operator. For isotropic scattering, it is defined as \[ S \psi = \int\limits_{4\pi}\dome'\ \sigs(\ome\cdot\ome')\psi(\ve{r},\ome')=\frac{\sigs\phi}{4\pi},\]  $q$\ is the volumetric source and $\phi$\ is the scalar flux defined as $\phi=\intli{4\pi}\dome\ \psi$.\ Additionally, $\st$\ and $\sigs$\ are total and scattering cross sections, respectively. %Solving Eq.\ \eqref{e:te}\ is the foundation for more complicated problems involving multiple energies and/or time dependence. In this work, we will focus on the spatial discretization.
+
+The boundary conditions for Eq.~\eqref{e:te} specify the angular flux $\psii{}$ on the boundary for incoming directions:
+\begin{equation}\label{e:bc}
+\psi(\ve{r}, \ome) = \psii{}(\ve{r}, \ome) \qquad \text{for}\quad r\in\pd, \qquad \ndo<0.
+\end{equation}
+
+\subsection{LS weak formulation}
+In order to employ CFEM to solve the transport equation, Hansel, et al.\ \cite{Hansen:2015jq} derived a least-squares form of transport equation by multiplying the transport equation by adjoint streaming and removal operator,\ i.e.
+\begin{equation}\label{eq:ls_adj}
+L^\dagger\left(L\psi-\qs\right)=0,
+\end{equation}
+where \[ L^\dagger = - \omen(\cdot)+\st.\]
+The corresponding weak form of the problem in  Eq.~\eqref{eq:ls_adj} with CFEM  is: 
+find $\psi\in\mathcal{V}$\ such that $\forall v\in\mathcal{V}$:
+\begin{equation}\label{e:hansen1}
+\dint vL^\dagger\left(L\psi-\qs\right)=0,
+\end{equation}
+where $\mathcal{D}$\ represents the problem domain. The property of adjoint operators that $(L v, u) = (v, L^\dagger u)$, for an inner-product $(\cdot.\cdot)$, allows us to express Eq.~\eqref{e:hansen1} as
+%\begin{align}
+%\dint vL^\dagger\left(L\psi-\qs\right)
+%=\dint Lv\left(L\psi-\qs\right)\nonumber\\
+%-\oint\limits_{4\pi}d\Omega\oint\limits_\mathcal{\partial D}dV\ \ndo\left(v\left(L\psi-\qs\right)\right)=0.
+%\end{align}
+%Requiring $L\psi-\qs=0$\ to be fulfilled on boundary, the resulting weak form becomes:
+\begin{equation}\label{eq:weakform_final}
+\dint Lv\left(L\psi-\qs\right)=0.
+\end{equation}
+
+On the other hand, one could also derive the weak form from defining a least-squares functional of transport residual:
+\begin{equation}\label{e:func0}
+\Gamma_\mathrm{LS}=\frac{1}{2}\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ (L\psi-\qs)^2.
+\end{equation}
+Minimizing Eq.\ \eqref{e:func0}\ in a discrete function space $\mathcal{V}$\ leads to Eq.~\eqref{eq:weakform_final}\ as well\footnote{The procedure of the minimization is to find a stationary ``point" in specific function space, see Ref.\ \cite{runchang}\ for details}. 
+%\begin{equation}
+%\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ LvL\psi=\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ Lvq_\mathrm{s}.
+%\end{equation}
+%This is equivalent to Eq.~\eqref{eq:weakform_final}.
+%or equivalently with explicitly expressing $\qs$
+%\begin{align}
+%\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ Lv\left(L-S\right)\psi=\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ Lvq,
+%\end{align}
+%where $v$\ and $\psi$\ are weight functions and solution spanned by functions in $\mathcal{V}$.\ That being said, solving transport equation with least-squares discretization using continuous basis function is equivalent to solving LSTE with CFEM.
+
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection{Imposing boundary condition}
+%-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The derivation above shows ignored the incident boundary conditions. Though it is possible to impose a strong boundary condition \cite{yunhuang_dissertation},\ a weak boundary condition is chosen in this work instead. To weakly impose the boundary condition, the functional is changed to
+\begin{align}
+\Gamma_\mathrm{LS}=\frac{1}{2}\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ (L\psi-\qs)^2+\frac{1}{2}\int\limits_{\ndo<0}d\Omega\ \int\limits_\mathcal{\pd}ds\ \lambda \lp\psi-\psii{}\rp^2, %\st\absndo
+\end{align}
+where $\lambda$ is freely-chosen. 
+The resulting LS weak formulation with boundary condition is then expressed as:
+\begin{align}\label{e:ls1}
+\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ Lv\left(L-S\right)\psi+\int\limits_{\ndo<0}d\Omega\ \int\limits_\mathcal{\pd}ds\ \lambda v\psi\nonumber\\
+=\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ Lvq+\int\limits_{\ndo<0}d\Omega\ \int\limits_\mathcal{\pd}ds\ \lambda v\psii{},
+\end{align}
+where the weight function $v$\ is any element of the trial space.
+
+If we choose $\lambda = \st\absndo$, then in non-void situations the LS scheme is globally conservative in homogeneous media (i.e., where $\st$\ is spatially independent in the whole domain). This can be seen by taking the weight function $v$\ to be $1$\ in Eq.\ \eqref{e:ls1} and performing the integration over angle to get
+%One would achieve a global balance equal to zero after performing the angular integration:
+\begin{subequations}\
+\begin{align}
+\st\mathbf{B}=0,
+\end{align}
+\begin{equation}\label{e:balance0}
+\mathbf{B}:=\lp\intli{\pd}ds\ \jo-\intli{\ndo<0}\dome \intli{\pd}ds\ \absndo\psii{}+\intli{\mathcal{D}}dV(\siga\phi-Q)\rp,
+\end{equation}
+\begin{equation}
+\jo:=\intli{\ndo>0}\dome\ \absndo\psi\quad\mathrm{and}\quad Q:=\intli{4\pi}\dome\ q.
+\end{equation}
+\end{subequations}
+Here $\mathbf{B}$ is the global balance: it states that the outgoing current, $\jo$, plus the absorption $\siga\phi$ is equal to the total source plus the incoming current. 
+These equations also demonstrate that why LS cannot maintain conservation in void: when $\st=0$,\ $\mathbf{B}$\ becomes undetermined.
+\section{A least-squares discretization allowing discontinuity on subdomain interface}\label{s:cdls_derive}
+%\subsection{Difference and equivalence between SAAF and LSTE}
+%Generally speaking, with sharp change of total cross sections, solution of SAAF is more accurate than LSTE. A reasonable hypothesis is the difference arises from the material interface since homogeneous problems, it is trivial to demonstrate the equivalence between SAAF and LSTE.
+%
+%Consider generic functions $\ps$\ and $\pl$,\ which represents solutions satisfying SAAF and LSTE exactly, respectively. Denote the difference by $\dpsi$\ such that
+%\begin{equation}\label{e:relate0}
+%\psi=\psi'+\delta\psi,
+%\end{equation}
+%additionally, we have
+%\begin{equation}\label{e:relate1}
+%\qs=S\psi+q\quad\mathrm{and}\quad\qs'=S\psi'+q.
+%\end{equation}
+%Then SAAF and LSTE, in operator forms, can be represented as:
+%\begin{subequations}
+%\begin{equation}\label{e:saaf-op}
+%L^\dagger\frac{1}{\st}\left(L\psi-\qs\right)=0
+%\end{equation}
+%\begin{equation}\label{e:lste-op}
+%L^\dagger\left(L\psi'-\qs'\right)=0
+%\end{equation}
+%\end{subequations}
+%
+%Perform the operation $\st\times$\eqref{e:saaf-op}+\eqref{e:lste-op}:
+%\begin{align}\label{e:error0}
+%\st L^\dagger\frac{1}{\st}\left(L\psi-\qs\right)-L^\dagger\left(L\psi'-\qs'\right)\\\nonumber
+%=\st\left(-\omen+\st\right)\frac{1}{\st}(L\psi-\qs)-L^\dagger\left(L\psi'-\qs'\right)\\\nonumber
+%=\st\left(-\omen\right)\left(\frac{1}{\st}(L\psi-\qs)\right)+\st(L\psi-\qs)-L^\dagger\left(L\psi'-\qs'\right)=0
+%\end{align}
+%Recognize that
+%\begin{align}\label{e:inter}
+%\st\left(-\omen\right)\left(\frac{1}{\st}(L\psi-\qs)\right)\\\nonumber
+%=-\st\left(\omen\frac{1}{\st}\right)(L\psi-\qs)-\st\frac{1}{\st}\left(\omen\left(L\psi-\qs\right)\right)\\\nonumber
+%=\frac{\omen{\st}}{\st}(L\psi-\qs)-\st\frac{1}{\st}\left(\omen\left(L\psi-\qs\right)\right)\\\nonumber
+%=\left(\omen\ln{\st}\right)(L\psi-\qs)-\left(\omen\left(L\psi-\qs\right)\right)
+%\end{align}
+%Introduce Eq.\ \eqref{e:inter}\ back into Eq.\ \eqref{e:error0},\ leading to
+%\begin{align}\label{e:error1}
+%\left(\omen\ln{\st}\right)(L\psi-\qs)+L^\dagger(L\psi-\qs)-L^\dagger(L\psi'-\qs')=0.
+%\end{align}
+%Plug Eqs.\ \eqref{e:relate0}\ and \eqref{e:relate1}\ in and rearrange, one shall see
+%\begin{equation}
+%\left(L^\dagger+\omen\cdot\ln\st\right)(L\dpsi-S\dpsi)=-\left(\omen\ln\st\right)(L\psi'-\qs').
+%\end{equation}
+%Consequently,
+%\begin{equation}\label{e:error2}
+%\dpsi=-(L-S)^{-1}\left(L^\dagger+\omen\cdot\ln\st\right)^{-1}\left(\omen\ln\st\right)(L\psi'-\qs').
+%\end{equation}
+%
+%Notice that for non-void homogeneous problems where cross section is constant, $\omen\ln\st\equiv 0$.\ Eq.\ \eqref{e:error2}\ predicts that solution from SAAF and LSTE should be identical with the same discretization scheme with proper boundary condition. However, when cross sections vary in space, these two methods differ. A example would be problems with multiple materials with distinct but piecewise constant total cross sections. In that case, $\dpsi$\ comes from the total cross section change on the material interface.
+\subsection{The SDLS functional and weak formulation}
+%The LS formulation symmetrizes the streaming operator so CFEM can be applied in the discretization. However, it does not have global conservation in heterogeneous problems where cross sections are not space-independent over the whole domain, which is crucial in k-eigenvalue problems. Also, with the presence of thin-thick material interface, the accuracy of scalar flux is degenerate.
+
+Given that LS is conservative  when the cross-sections are constant and non-void, we propose to reformulate the problem to solve  using least-squares in subdomains where cross-sections are constant. On the boundary of these subdomains we connect the angular fluxes using an interface condition that allows the fluxes to be discontinuous. The result is a discretization that can be solved using a procedure analogous to transport sweeps where the sweeps are over subdomains, instead of mesh zones.
+
+In context of a minimization problem, we can define a functional in the following form:
+\begin{align}\label{e:cdls_func}
+\Gamma_\mathrm{SDLS}=\frac{1}{2}\slim{\dii}&\ointli{4\pi}d\Omega\ \intli{\dii}dV\ (L_\mathrm{i}\psi_\mathrm{i}-q_\mathrm{si})^2+\frac{1}{2}\intli{\ndo<0}d\Omega\ \intli{\pd}dV\ \st\absndo(\psi-\psii{})^2\nonumber\\
+&+\frac{1}{2}\slim{\dii}\slim{\fij}\intli{\nido<0}d\Omega\ \intli{\fij}ds\ \sigma_\mathrm{ti}\absnido(\psii{i}-\psii{j})^2,
+\end{align}
+where $\fij$\ is the interface between $\dii$\ and any contiguous subdomain $\djj$.\ Accordingly, the variational problem turns to: find $\psi_\mathrm{i}$\ in a polynomial space $\mathcal{V}$\ such that $\forall v_\mathrm{i}\in\mathcal{V}$,\
+\begin{multline}\label{e:cdls_weak}
+\slim{\dii}\left(\ointli{4\pi}d\Omega\ \intli{\dii}dV\ L_\mathrm{i}v_\mathrm{i}\left(L_\mathrm{i}-S_\mathrm{i}\right)\psi_\mathrm{i}+\slim{\fij}\sigma_\mathrm{ti}\intli{\nido<0}d\Omega\ \intli{\fij}ds\  \absnido v_\mathrm{i}\left(\psi_\mathrm{i}-\psi_\mathrm{j}\right)\right)\\
++\intli{\ndo<0}d\Omega\ \ointli{\pd}ds\ \st\absndo v\psi=\slim{\dii}\ointli{4\pi}d\Omega\ \intli{\dii}dV L_\mathrm{i}v_\mathrm{i}q_\mathrm{i}+\intli{\ndo<0}d\Omega\ \ointli{\pd}ds\ \st\absndo v\psii{}.
+\end{multline}
+
+Compared with ordinary LS method as illustrated in Eq.\ \eqref{e:ls1},\ SDLS does not enforce the continuity on subdomain interface. That  presents possibility of combining the least-squares method and transport sweeps. For a given direction, $\ome$, Eq.~\eqref{e:cdls_weak} can be written as a block-lower triangular system, where each block is LS applied to a subdomain.The inversion of this system requires solving a LS system for each subdomains, connected via boundary angular fluxes. For unstructured meshes this approach can be superior to standard transport sweeps due to potential sweeping and parallel efficiencies.
+
+\subsection{Subdomain-wise and global conservation}
+We can demonstrate that SDLS is conservative globally and over each subdomain.
+%Then the SDLS weak formulation in Eq.\  is:
+%\begin{subequations}
+%\begin{align}\label{e:2reg-weak}
+%(L_1v_1,(L_1-S_1)\psi_1-q_1)_{\tiny\done}+\sigma_\mathrm{t1}<v_1,\psi_1-\psi_1^{\mathrm{inc}}>^-_{\tiny\pdone}\\\nonumberm
+%+(L_2v_2,(L_2-S_2)\psi_2-q_2)_{\tiny\dtwo}+\sigma_\mathrm{t2}<v_2,\psi_2-\psi_2^{\mathrm{inc}}>^-_{\tiny\pdtwo}\\
+%+\sigma_\mathrm{t1}<v_1,\psi_1-\psi_2>^-_{\tiny\Gamma_\mathrm{l}}+\sigma_\mathrm{t2}<v_2,\psi_2-\psi_1>^-_{\tiny\Gamma_\mathrm{r}}=0\nonumber
+%\end{align}
+%\begin{equation}
+%L_\mathrm{i}:=\omen+\sigma_\mathrm{ti}\quad\mathrm{and}\quad S:=\int\limits_{4\pi}d\Omega'\ \sigs(\Omega\cdot\Omega')(\cdot)
+%\end{equation}
+%\end{subequations}
+
+\begin{figure}[ht!]
+	\begin{center}
+%		\includegraphics[width=.7\textwidth]{cdls-balance-generic.pdf}
+		\includegraphics[width=.7\textwidth]{balance}
+		%\includegraphics[width=0.45\textwidth]{srholam.eps}
+		\caption[]{Generic multi-region problem for illustration of global conservation for SDLS.}% Only the ``Figure" label and figure number are bold.}
+		\label{f:cdls-balance}
+	\end{center}
+\end{figure}
+%Taking all the test functions to be unity, i.e.\ $v_\mathrm{i}=1$\, 
+A conservative scheme with appropriate boundary conditions is expected to retain zero balance, i.e., %\footnote{In fact, one would instead expect a round-off balance, which is related to the machine precision.}
+\begin{equation}
+\int\limits_{\vec{n}\cdot\ome>0}d\Omega\ \oint\limits_{\partial\mathcal{D}}ds\ |\vec{n}\cdot\ome|\psi-\int\limits_{\vec{n}\cdot\ome<0}d\Omega\ \oint\limits_{\partial\mathcal{D}}ds\ |\vec{n}\cdot\ome|\psi^\mathrm{inc}+\int\limits_\mathcal{D}dV\ (\siga\phi-Q)=0,
+\end{equation}
+where $Q=\displaystyle\intli{4\pi}\dome\ q$.
+
+%Take $v_\mathrm{i}=1$\ to Eq.\ \eqref{e:cdls_weak},\ we see
+%\begin{equation}
+%L_\mathrm{i}v_\mathrm{i}=\omen v_\mathrm{i}+\sigma_{\mathrm{ti}}v_\mathrm{i}=\sigma_{\mathrm{ti}}
+%\end{equation}
+To simplify the demonstration, we consider a 1-D slab with only two subdomains (see Figure\ \ref{f:cdls-balance}),\ within each the cross sections are constants.  Consequently, Eq.\ \eqref{e:cdls_weak} with $v_i = 1$ becomes
+\begin{multline}\label{e:2reg-balance0}
+\ointli{4\pi}d\Omega\ \intli{\done}dV\ \sigma_{\mathrm{t1}}((L_1-S_1)\psi_1-q_1)+\intli{\nodo<0}d\Omega\ \intli{\pdone}ds\ \sigma_\mathrm{t1}\absnodo\lp\psi_1-\psi_1^{\mathrm{inc}}\rp\\
++\ointli{4\pi}d\Omega\ \intli{\dtwo}dV\ \sigma_{\mathrm{t2}}((L_2-S_2)\psi_2-q_2)+\intli{\ntdo<0}d\Omega\ \intli{\pdtwo}ds\ \sigma_\mathrm{t2}\absntdo\lp\psi_2-\psi_2^{\mathrm{inc}}\rp\\
++\intli{\nodo<0}d\Omega\ \intli{\mathcal{F}_\mathrm{l}}ds\ \sigma_\mathrm{t1}\absnodo\lp\psi_1-\psi_2\rp+\intli{\ntdo<0}d\Omega\ \intli{\mathcal{F}_\mathrm{r}}ds\ \sigma_\mathrm{t2}\absntdo\lp\psi_2-\psi_1\rp=0.
+\end{multline}
+Defining the incoming and outgoing currents on a subdomain as
+\begin{equation}
+\ji_\mathrm{i}(\vec{r}):=\int\limits_{\nido<0}d\Omega\ \absnido\psi_\mathrm{i}\quad\mathrm{and}\quad\jo_\mathrm{i}(\vec{r}):=\int\limits_{\nido>0}d\Omega\ \absnido\psi_\mathrm{i},
+\end{equation}
+we then can write
+\begin{equation}\label{e:balance}
+\ointli{4\pi}d\Omega\ \intli{\dii}dV\ \left(L_\mathrm{i}\psi_\mathrm{i}-S_\mathrm{i}\psi_\mathrm{i}-q_\mathrm{i}\right)=\oint\limits_{\pdi}ds\ (\jo_\mathrm{i}-\ji_\mathrm{i})+\int\limits_{\dii}dV\ (\sigma_\mathrm{ai}\phi_\mathrm{i}-Q_\mathrm{i}).
+\end{equation}
+
+Using Eq.\ \eqref{e:balance} in Eq.~\eqref{e:2reg-balance0}, we get
+\begin{multline}\label{e:balance1}
+\stone\left(\int\limits_\sone+\int\limits_\gammal\right)ds\ (\jo_1-\cancel{\ji_1})+\stone\intli{\done}dV\ (\saone\phi_1-Q_1)\\
++\sttwo\left(\int\limits_\stwo+\int\limits_\gammar\right)ds\ (\jo_2-\bcancel{\ji_2})+\sttwo\intli{\dtwo}dV\ (\saone\phi_2-Q_2)\\
++\stone\left(\intli{\done}+\intli{\gammal}\right)ds\ \cancel{\ji_1}-\stone\intli{\sone}ds\ \intli{\nodo<0} d\Omega\ \absnodo\psii{1}-\stone\intli{\gammal}\intli{\nodo<0}\absnodo\psi_2(\gammar)\\
++\sttwo\left(\intli{\dtwo}+\intli{\gammar}\right)ds\ \bcancel{\ji_2}-\stone\intli{\stwo}ds\ \intli{\ntdo<0} d\Omega\ \absntdo\psii{2}-\sttwo\intli{\gammar}\intli{\ntdo<0}\absntdo\psi_1(\gammal)=0,
+\end{multline}
+where the incoming currents that sum to zero have been crossed out.
+
+Denoting balances of $\mathcal{D}_1$\ and $\mathcal{D}_2$\ by $\bone$\ and $\btwo$, respectively, we then have a weighted balance equation:
+\begin{equation}\label{e:wtd_balance}
+\stone\bone+\sttwo\btwo=0,
+\end{equation}
+where
+\begin{align}\label{e:bone}
+\bone=\left(\int\limits_\sone+\int\limits_\gammal\right)ds\ \jo_1&+\intli{\done}dV\ (\saone\phi_1-Q_1)\\\nonumber
+-\intli{\sone}ds\ \intli{\nodo<0}& d\Omega\ \absnodo\psii{1}-\intli{\gammal}ds\ \intli{\nodo<0}\dome\ \absnodo\psi_2(\gammar),
+\end{align}
+and
+\begin{align}\label{e:btwo}
+\btwo=\left(\int\limits_\stwo+\int\limits_\gammar\right)ds\ \jo_2&+\intli{\dtwo}dV\ (\satwo\phi_2-Q_2)\\\nonumber
+-\intli{\stwo}ds\ \intli{\ntdo<0}& d\Omega\ \absntdo\psii{2}-\intli{\gammar}ds\ \intli{\ntdo<0}\dome\ \absntdo\psi_1(\gammal).
+\end{align}
+
+For all nonzero $\stone$\ and $\sttwo$,\ in order to make Eq.\ \eqref{e:wtd_balance}\ true, one must have conservation in each subdomain:
+\begin{equation}\label{e:wted-conservation}
+\bone\equiv 0\quad\mathrm{and}\quad\btwo\equiv 0.
+\end{equation}
+Additionally, this implies that there is global conservation because $\bone + \btwo = 0$. \need{The global conservation can also be generalized to any problem with more than two subdomain}. Therefore, the SDLS scheme is conservative if the cross section is subdomain-wise constant (and nonzero).
+
+\subsection{Void Treatment}
+\need{In void, global conservation, yet, is not preserved. It can be seen that Eq.\ \eqref{e:wted-conservation}\ will hold for any nonzero $\btwo$\ by taking $\sttwo=0$.\ Therein $\bone+\btwo\neq0$.\ In remedying conservation issue of LS in homogeneous void/near-void materials, Laboure et al. proposed a penalty method to preserve the conservation \cite{laboure:2016}:}
+\begin{align}
+\ointli{4\pi}\dome\ \intli{\mathcal{D}}dV\ \left(Lv+\sigma_\mathrm{p}v\right)\left(L-S\right)\psi+\intli{\ndo<0}\dome\ \intli{\pd}ds\ \left(\st+\sigma_\mathrm{p}\right)\absndo v\psi\nonumber\\
+=\ointli{4\pi}\dome\ \intli{\mathcal{D}}dV\ \left(Lv+\sigma_\mathrm{p}v\right)q+\intli{\ndo<0}\dome\ \intli{\pd}ds\ \left(\st+\sigma_\mathrm{p}\right)\absndo v\psii{},
+\end{align}
+\need{where $\sigma_\mathrm{p}$\ is the penalty coefficient with a unit of cm$^{-1}$.\ Taking $v=1$\ would then lead to:}
+\begin{equation}
+\left(\sigt+\sigma_\mathrm{p}\right){\bf B}=0.
+\end{equation}
+\need{In our work, we use $\sigma_\mathrm{p}=1$\ cm$^{-1}$\ for $\st<0.001$\ cm$^{-1}$.}
+%In addition, since $\bone$\ and $\btwo$\ are zero, therefore
+%\begin{equation}
+%\bone+\btwo\equiv 0
+%\end{equation}
+%
+%Note that
+%\begin{align}
+%\intli{\gammal}ds\ \jo_1-\intli{\gammar}ds\ \intli{\ndo<0}d\Omega\ |\ndo|\psi_1(\gammal)\\\nonumber
+%=\intli{\gammal}ds\ \jo_1-\intli{\gammal}ds\ \intli{\ndo>0}d\Omega\ |\ndo|\psi_1(\gammal)=0,
+%\end{align}
+%and
+%\begin{align}
+%\intli{\gammar}ds\ \jo_2-\intli{\gammal}ds\ \intli{\ndo<0}d\Omega\ |\ndo|\psi_2(\gammar)\\\nonumber
+%=\intli{\gammar}ds\ \jo_2-\intli{\gammar}ds\ \intli{\ndo>0}d\Omega\ |\ndo|\psi_2(\gammar)=0.
+%\end{align}
+%
+%As a consequence,
+%\begin{align}
+%\bone+\btwo=\int\limits_\sone ds\ \jo_1+\intli{\done}dV\ (\saone\phi_1-Q_1)-\intli{\sone}ds\ \intli{\vec{n}\cdot\ome<0}d\Omega\ |\vec{n}\cdot\ome|\psii{1}\\\nonumber
+%+\int\limits_\stwo ds\ \jo_2+\intli{\dtwo}dV\ (\satwo\phi_2-Q_2)-\intli{\stwo}ds\ \intli{\vec{n}\cdot\ome<0}d\Omega\ |\vec{n}\cdot\ome|\psii{2}=0\\\nonumber
+%\end{align}
+
+
+%\subsubsection{1D: Blockwise transport sweeps}
+%\subsubsection{Multi-D: SDLS with MIP-DSA}
+\section{Numerical results}\label{s:numerics}
+The implementation is carried out by the {\tt C++}  finite element library {\tt deal.II} \cite{dealii82}. In all tests, we also include results from solving the globally conservative self-adjoint angular flux (SAAF) equation with CFEM as a comparison\cite{morel_saaf,yaqi_void}. In all problems, piecewise linear polynomial basis functions are used.
+%\subsection{Modified Reed's problem}
+%The first problem we solve is a modification of Reed's problem \cite{reed_1971}. The material properties we use are listed in Table\ \ref{tb:reed}.\ Results using S$_8$\ in angle are presented in Figure\ \ref{f:reed}. In this figure 48 cells are used for CFEM-LS (green line),\ CFEM-SAAF (blue line) and SDLS (red lines) calculations. For SDLS, the interfaces are set at $x=3,5,6$\ cm. 
+%
+%The reference solution (black dash line) is made from CFEM-SAAF with $8 \times 10^3$ cells. Without enough refinement, solutions for CFEM-SAAF and CFEM-LS are distorted in the thin absorber ($x\in(3,5)$\ cm). Also, the accuracy in the source region $x\in(2,3)$\ cm suffers. However, SDLS, through adding a few extra DoFs on the material interfaces and therefore introducing discontinuities, provides much better agreement with the reference using merely 48 cells plus 3 extra degrees of freedom per direction.
+%
+%%To better fit the thick regions, methods with CFEM tends to ``sacrifice" the thin-region solution. On the other hand, SDLS scheme chooses to break the continuity on the interfaces and add one extra DoF at one interface per direction. The gain is thin regions, away from the interfaces, scalar flux is recovered and thus accurate.
+%\begin{table}[ht!]
+%	\centering
+%	\caption{Material configuration for modified Reed's problem.}
+%	\label{tb:reed}
+%	\hspace*{0cm}\begin{tabular}{|c|c|c|c|c|c|}
+%		%\label{tb:1}
+%		\hline
+%		x [cm] & (0,2) & (2,3) & (3,5) & (5,6)& (6,8)\\
+%		\hline
+%		$\st$ [cm$^{-1}$]& $1$ & $1$ & $0.005$ & $5$&$50$\\
+%		\hline
+%		$\sigs$ [cm$^{-1}$]& $0.9$ & $0.9$ & $0$ & $0$&$0$\\
+%		\hline
+%		$Q$& $0$ & $1$ & $0$ & $0$&$50$\\
+%		\hline
+%	\end{tabular}
+%\end{table}
+%
+%\begin{figure}[ht!]
+%	\begin{center}
+%		\includegraphics[width=.7\textwidth]{CDLS-REEDS}
+%		%\includegraphics[width=0.45\textwidth]{srholam.eps}
+%		\caption[]{Modified Reed's problem result comparison.}% Only the ``Figure" label and figure number are bold.}
+%		\label{f:reed}
+%	\end{center}
+%\end{figure}
+
+\subsection{Reed's problem}
+\need{The first problem is the heterogeneous Reed's problem \cite{reed_1971}\ designed to test spatial differencing accuracy and stability. The material properties are listed in Table\ \ref{tb:reed}.\ Specifically, a void region $x\in(3,~5)$\ cm manifests. Results using S$_8$\ in angle are presented in Figure\ \ref{f:reed-real}. In this figure 32\ cells are used for CFEM-LS (green line),\ CFEM-SAAF (blue line) and SDLS (red lines) calculations. For SDLS, the interfaces are set at $x=3,5,6$\ cm.. As illustrated in Figure\ \ref{f:reed-real}.\ The reference is the solution to first-order transport equation with diamond difference scheme using 16000\ cells.\ With the void treatment, the flux profile in $x\in(3,5)$\ is flat and the relative error is smaller than $3\e{-5}$.\ By defining the relative balance as:}
+\[{\bf B}_\mathrm{rel}=\frac{|{\bf B}|}{\displaystyle\intli{\ndo<0}\dome \intli{\pd}ds\ \absndo\psii{}+\intli{\mathcal{D}}dV\ Q},\]
+\need{we found that the SDLS is globally conservative as ${\bf B}_\mathrm{ref}=5.56\e{-12}$.\ On the other hand, LS solution is distorted in void and the balance is poor (${\bf B}_\mathrm{ref}=3.73\e{-3}$)}
+
+\begin{table}[ht!]
+	\centering
+	\caption{Material configuration for Reed's problem.}
+	\label{tb:reed}
+	\hspace*{0cm}\begin{tabular}{|c|c|c|c|c|c|}
+		%\label{tb:1}
+		\hline
+		x [cm] & (0,2) & (2,3) & (3,5) & (5,6)& (6,8)\\
+		\hline
+		$\st$ [cm$^{-1}$]& $1$ & $1$ & $0$ & $5$&$50$\\
+		\hline
+		$\sigs$ [cm$^{-1}$]& $0.9$ & $0.9$ & $0$ & $0$&$0$\\
+		\hline
+		$Q$& $0$ & $1$ & $0$ & $0$&$50$\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[ht!]
+	\begin{subfigure}{.5\textwidth}
+		\begin{center}
+			\hspace*{-2.5cm}\includegraphics[width=1.3\textwidth]{cdls-reed}
+			%\includegraphics[width=0.45\textwidth]{srholam.eps}
+			\caption[]{Reed's problem result comparison.}% Only the ``Figure" label and figure number are bold.}
+			\label{f:reed-real}
+		\end{center}
+	\end{subfigure}
+	~
+	\begin{subfigure}{.5\textwidth}
+		\begin{center}
+			\includegraphics[width=1.3\textwidth]{cdls-reed-zoomed}
+			%\includegraphics[width=0.45\textwidth]{srholam.eps}
+			\caption[]{Zoomed results $x\in(4.75,~6.25)$\ cm.}% Only the ``Figure" label and figure number are bold.}
+			\label{f:reed-real-zoomed}
+		\end{center}
+	\end{subfigure}
+	\caption{Reed's problem results from different methods. 32\ cells are used.}
+\end{figure}
+
+\need{In the comparison, we also include the result (CFEM-SAAF-CLS) from the conservative hybrid scheme developed in \cite{laboure:2016}.\ The method combines CFEM-SAAF in non-void area with LS using conservative void treatment (namely (C)onservative LS). The formulation is detailed in \cite{laboure:2016}.\ The whole scheme is discretized using CFEM and solved with BiCGStab due to the asymmetric nature of void treatment.}
+
+\need{SAAF-CLS graphically gives a better solution than LS in most regions of the problem. However, as with CFEM, solution in thin regions (void) is heavily affected by the thick absorber ($x\in(5,~6)$\ cm)}
+
+\subsection{Two region absorption problem}
+Another test problem is a 1D slab pure absorber problem. There is a unit incident angular flux on left boundary of the slab. No source appears in the domain. In this problem \[\st= \begin{cases} 0.1\,  \text{cm}^{-1} &  x<1\, \text{cm} \\  10\, \text{cm}^{-1} & \text{ otherwise}\end{cases}.\]
+The reference solution in this problem was computed with first order S$_8$\ using diamond difference with $2\times10^4$\ cells in space.
+\begin{figure}[ht!]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		%		\hspace*{-3cm}\includegraphics[width=8cm,height=5cm]{gd0_10s.eps}
+		\hspace*{-1cm}\includegraphics[width=1.\linewidth]{2reg-16c-cdls.pdf}
+		\caption{16 cells.}
+		\label{f:2reg-16c}
+	\end{subfigure}
+	~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		%\hspace*{-0cm}\includegraphics[width=8cm,height=4.8cm]{bd0_4s.eps}
+		\includegraphics[width=1.\linewidth]{2reg-40c-cdls.pdf}
+		\caption{40 cells.}
+		\label{f:2reg-40c}
+	\end{subfigure}
+	\caption{Two-region absorption results comparison with LS, SAAF and SDLS.}
+	\label{mlfls}
+\end{figure}
+
+The results in Figure \ref{mlfls} compare coarse solutions using different methods. The LS and SAAF solutions in the thin region are affected by the presence of the thick region, even though that region is downstream of the incoming boundary source.  Increasing the cell count does improve these solutions, but there is still significant discrepancy with the reference solution. In both cases, the SDLS solution captures the behavior of the reference solution. In Figure \ref{f:2reg-leak-error} we see that both LS SDLS and SAAF converge to the exact solution at second-order, with the convergence for LS being a bit more erratic.
+
+\begin{figure}[ht!]
+	\begin{center}
+		\includegraphics[width=.7\textwidth]{2reg-leak}
+%		\includegraphics[width=.7\textwidth]{2reg-leakerror-cdls.pdf}
+		%\includegraphics[width=0.45\textwidth]{srholam.eps}
+		\caption[]{Leakage errors vs. DoF counts per direction at the right boundary.}% Only the ``Figure" label and figure number are bold.}
+		\label{f:2reg-leak-error}
+	\end{center}
+\end{figure}
+
+Table \ref{tb:1}\ presents the relative global balances for different methods. As expected, LS presents large balance errors, even when the mesh is refined. On the other hand, CFEM-SAAF and SDLS give round-off balance to the iterative solver tolerance as expected. 
+
+\begin{table}[ht!]
+\centering
+\caption{Relative global balances with different methods.}
+\label{tb:1}
+\hspace*{-1cm}\begin{tabular}{|c|c|c|c|c|c|}
+%\label{tb:1}
+\hline
+Number of Cells & 20 & 40 & 80 & 160& 320\\
+\hline
+LS& $8.439\e{-1}$ & $6.426\e{-1}$ & $3.564\e{-1}$ & $3.430\e{-1}$&$4.948\e{-2}$\\
+\hline
+CFEM-SAAF&$5.899\e{-14}$&$1.786\e{-13}$&$2.615\e{-13}$  &$1.274\e{-12}$&$5.599\e{-12}$\\
+\hline
+SDLS&$2.148\e{-13}$&$7.668\e{-13}$&$1.492\e{-12}$  &$2.090\e{-11}$&$2.704\e{-12}$\\
+\hline
+\end{tabular}
+
+\end{table}
+
+%\begin{table}[ht!]
+%	\centering
+%	\caption{Relative global balance per cell with different methods.}
+%	\label{tb:1}
+%	\hspace*{-1cm}\begin{tabular}{|c|c|c|c|c|c|}
+%		%\label{tb:1}
+%		\hline
+%		Number of Cells & 20 & 40 & 80 & 160& 320\\
+%		\hline
+%		LS& $4.2\e{-2}$ & $1.6\e{-2}$ & $4.4\e{-3}$ & $2.2\e{-3}$&$1.6\e{-4}$\\
+%		\hline
+%		CFEM-SAAF&$2.9\e{-15}$&$4.4\e{-15}$&$3.3\e{-15}$  &$7.8\e{-15}$&$1.8\e{-14}$\\
+%		\hline
+%		SDLS&$1.1\e{-14}$&$1.9\e{-14}$&$1.9\e{-14}$  &$1.3\e{-13}$&$8.6\e{-15}$\\
+%		\hline
+%	\end{tabular}
+%	
+%\end{table}
+
+\subsection{Thin-thick $k$-eigenvalue problem}
+\need{A one-group $k$-eigenvalue problem is also tested in 1D slab geometry. There is an absorber region in $x\in(0,0.3)$\ cm and a fissile region in $x\in(0.3,1.5)$\ cm. Material properties are presented in Table\ \ref{tb:eigen}.\ Reflective BCs are imposed on both sides of the slab. The configuration is to mimic the impact from setting a control rod near the fuel pins. With the presence of the strong absorber}
+
+\begin{table}[ht!]
+	\centering
+	\caption{Material configuration for $k$-eigenvalue problem.}
+	\label{tb:eigen}
+	\hspace*{0cm}\begin{tabular}{|c|c|c|}
+		%\label{tb:1}
+		\hline
+		x [cm] & (0,0.5) & (0.5,1.5)\\
+		\hline
+		$\st$ [cm$^{-1}$]& $5$ & $1$\\
+		\hline
+		$\sigs$ [cm$^{-1}$]& $0$ & $0.99$\\
+		\hline
+		$\nu\sigma_\mathrm{f}$& $0$ & $0.25$\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[ht!]
+	\begin{center}
+		\includegraphics[width=.7\textwidth]{eigen-flx}
+		%		\includegraphics[width=.7\textwidth]{2reg-leakerror-cdls.pdf}
+		%\includegraphics[width=0.45\textwidth]{srholam.eps}
+		\caption[]{Scalar flux from different methods.}% Only the ``Figure" label and figure number are bold.}
+		\label{f:eigen-flx}
+	\end{center}
+\end{figure}
+
+\begin{figure}[ht!]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\hspace*{-2cm}\includegraphics[width=1.1\linewidth]{cdls-eigen}
+		\caption{k$_\mathrm{eff}$\ values from different methods.}
+		\label{f:k}
+	\end{subfigure}
+	~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\hspace*{-0cm}\includegraphics[width=1.1\linewidth]{cdls-eigen-error}
+		\caption{Absolute errors in pcm.}
+		\label{f:k-err}
+	\end{subfigure}
+	\caption{k-eigenvalue results.}
+	\label{f:eigen}
+\end{figure}
+
+\subsection{One group iron-water problem}
+The last test is a modified one-group iron-water shielding problem \cite{adams_iron_water}\ used to test accuracy of numerical schemes in relatively thick materials (see the configuration in Figure\ \ref{f:config}). Material properties listed in Table\ \ref{tb:iw}\ are from the thermal group data in \cite{adams_iron_water}.\ S$_4$\ is used as the angular discretization. The reference is  CFEM-SAAF using $1200 \times 1200$ cells (see the scalar flux in Figure\ \ref{f:pcolor}).\ The scalar flux in the domain is rather smooth due to the scatterings. As a result, with moderately fine mesh (120$\times$120\ cells), we see SDLS graphically agrees with SAAF and LS in the line-out illustrated in Figure\ \ref{f:line}.\ We further examine the absorption rate error in iron. As shown in Figure\ \ref{f:e_abs},\ LS and SAAF presents similar spatial convergence rates. However, LS presents lower accuracy than CFEM-SAAF with the presence of material interface between iron and water. On the other hand, by setting two interfaces between iron and water and introducing extra DoFs on the interfaces, SDLS converges to the reference solution much earlier that than the other methods.
+
+\begin{table}[ht!]
+	\centering
+	\caption{Material cross sections in one-group iron-water test.}
+	\label{tb:iw}
+	\hspace*{-1cm}\begin{tabular}{|c|c|c|}
+		%\label{tb:1}
+		\hline
+		Materials & $\st$\ [cm$^{-1}$] & $\sigs$\ [cm$^{-1}$]\\
+		\hline
+		Water& $3.2759$ & $3.2656$ \\
+		\hline
+        Iron&$1.1228$&$0.9328$\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{figure}[ht!]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\hspace*{-2cm}\includegraphics[width=.95\linewidth]{iw-config.png}
+		\caption{Problem configuration.}
+		\label{f:config}
+	\end{subfigure}
+	~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\hspace*{-0cm}\includegraphics[width=1.1\linewidth]{iw-pp}
+		\caption{Scalar flux distribution from reference.}
+		\label{f:pcolor}
+	\end{subfigure}
+	\caption{Results from the iron water problem.}
+	\label{f:iron-water}
+\end{figure}
+
+\begin{figure}[ht!]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\hspace*{-2cm}\includegraphics[width=.95\linewidth]{along-x}
+		\caption{Line-out plot for $x=10.1$\ cm.}
+		\label{f:line}
+	\end{subfigure}
+	~
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\hspace*{-0cm}\includegraphics[width=1.1\linewidth]{iw-error.pdf}
+		\caption{Relative errors of absorption rate in iron vs DoF counts in one direction.}
+		\label{f:e_abs}
+	\end{subfigure}
+	\caption{Results from the iron water problem.}
+	\label{f:iw}
+\end{figure}
+\section{Concluding remarks and future work}
+In this work, we proposed a subdomain discontinuous least-squares discretization method for solving neutron particle transport. It solves a least-squares problem on each region of the problem that has the same total cross-section, and couples the contiguous regions with discontinuous interface conditions. We demonstrated that our formulation preserves conservation in each subdomain and gives smaller numerical error than either SAAF or standard least squares methods. 
+
+Though SDLS is angularly discretized with \sn\ method, \pn\ would be applicable in the angular discretization as well. Therein, LS\pn\cite{zheng_invite,manteuffel_lspn_scaling,varin_lspn}\ is applied in each subdomain with Mark-type boundary condition used as interface condition. Further, since SDLS allows the discontinuity on the subdomain interface, different angular schemes, e.g. \sn\ and \pn\ can be used in different subdomains. In fact, with borrowing the interface discontinuity methodology, the angular hybridization has been implemented for SAAF\cite{yaqi_physor16,yaqi_invite}.
+\section*{Acknowledgements}
+W. Zheng is thankful to Dr. Bruno Turksin from Oak Ridge National Laboratory for the suggestions on multi-D implementation. Also, Zheng appreciates Dr. Yaqi Wang from Idaho National Laboratory for his suggestions to make the notation simple and clear. He wants to give appreciation to Hans Hammer from Texas A\&M Nuclear Engineering for running reference tests as well.
+
+This project was funded by Department of Energy NEUP research grant from Battelle Energy Alliance, LLC- Idaho National Laboratory, Contract No: C12-00281.
+\section*{References}
+\bibliography{mybibfile}
+
+\end{document}
