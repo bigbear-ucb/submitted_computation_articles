@@ -1,0 +1,155 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\usepackage{color}
+\usepackage{amsmath,amsfonts,amssymb,esvect,ulem}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{cancel}
+\usepackage{epstopdf}
+\usepackage{subcaption}
+%\usepackage{kpfonts}
+%\usepackage{subfigure}
+\modulolinenumbers[5]
+
+\journal{Journal of xxx}
+
+
+%\setlength\parindent{0pt} % Removes all indentation from paragraphs
+%\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{#1}}}
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+\newcommand{\px}{\frac{\partial}{\partial x}}
+\newcommand{\st}{\sigma_\mathrm{t}}
+\newcommand{\pxt}{\frac{\partial^2}{\partial x^2}}
+\newcommand{\stt}{\st^2}
+\newcommand{\dst}{\frac{\partial\st}{\partial x}}
+\newcommand{\ppz}{\partial_x}%{\frac{\partial}{\partial x}}
+\newcommand{\ppzt}{\frac{\partial^2}{\partial x^2}}
+\newcommand{\psii}[1]{\psi^\mathrm{inc}_\mathrm{{#1}}}
+\newcommand{\vp}[1]{\vec{\phi}^{({#1})}}
+\newcommand{\sn}{S$_N$}
+\newcommand{\pn}{P$_N$}
+\newcommand{\omen}{\ome\cdot\nabla}
+\newcommand{\dpsi}{\delta\psi}
+\newcommand{\pl}{\psi}
+\newcommand{\ps}{\psi'}
+
+\newcommand{\qsl}{\qs^\mathrm{LS}}
+\newcommand{\done}{{\mathcal{D}_\mathrm{1}}}
+\newcommand{\dtwo}{{\mathcal{D}_\mathrm{2}}}
+\newcommand{\pd}{{\partial\mathcal{D}}}
+\newcommand{\pdone}{{\mathcal{F}_\mathrm{1}}}
+\newcommand{\pdtwo}{{\mathcal{F}_\mathrm{2}}}
+\newcommand{\intli}[1]{\int\limits_{{#1}}}
+\newcommand{\ointli}[1]{\oint\limits_{{#1}}}
+
+\newcommand{\dii}{{\mathcal{D}_\mathrm{i}}}
+\newcommand{\djj}{{\mathcal{D}_\mathrm{j}}}
+\newcommand{\fij}{{\Gamma_\mathrm{ij}}}
+\newcommand{\pdi}{{\partial\mathcal{D}_\mathrm{i}}}
+\newcommand{\pdj}{{\partial\mathcal{D}_\mathrm{j}}}
+
+\newcommand{\need}[1]{\fbox{\large \textcolor{red}{ #1}}}
+\newcommand{\slim}[1]{\sum\limits_{\tiny#1}}
+\newcommand{\dint}{\oint\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ }
+\newcommand{\nido}{\vec{n}_\mathrm{i}\cdot\ome}
+\newcommand{\absnido}{\left|\nido\right|}
+\newcommand{\ndo}{\vec{n}\cdot\ome}
+\newcommand{\absndo}{\left|\ndo\right|}
+
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\newcommand{\TAMU}{Texas A\&M University}
+\newcommand{\ddxcs}{\sigma(E'\to E,~\mu)}
+\newcommand{\sigt}{\sigma_\mathrm{t}}
+\newcommand{\sigs}{\sigma_\mathrm{s}}
+\newcommand{\siga}{\sigma_\mathrm{a}}
+\newcommand{\stone}{{\sigma_\mathrm{t1}}}
+\newcommand{\sttwo}{{\sigma_\mathrm{t2}}}
+\newcommand{\saone}{{\sigma_\mathrm{a1}}}
+\newcommand{\satwo}{{\sigma_\mathrm{a2}}}
+\newcommand{\sone}{{\mathcal{F}_\mathrm{1}}}
+\newcommand{\stwo}{{\mathcal{F}_\mathrm{2}}}
+\newcommand{\bone}{{\mathbf{B}_\mathrm{1}}}
+\newcommand{\btwo}{{\mathbf{B}_\mathrm{2}}}
+\newcommand{\gammal}{{{\Gamma}_\mathrm{l}}}
+\newcommand{\gammar}{{{\Gamma}_\mathrm{r}}}
+
+\newcommand{\intd}{\int\limits_\mathcal{D}dV\ }
+\newcommand{\intfpd}{\int\limits_{4\pi}d\Omega\ \int\limits_\mathcal{D}dV\ }
+\newcommand{\qs}{q_\mathrm{s}}
+\newcommand{\ome}{\vv{\Omega}}
+\newcommand{\dome}{d\Omega}
+\newcommand{\psil}{\psi^\mathrm{LS}}
+\newcommand{\ji}{j^\mathrm{in}}
+\newcommand{\jo}{j^\mathrm{out}}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\rpd}{\right)_\mathcal{D}}
+\newcommand{\rpdi}{\right)_{\mathcal{D}_\mathrm{i}}}
+
+\newcommand{\lb}{\left<}
+\newcommand{\rbp}{\right>^+_\mathcal{\pd}}
+\newcommand{\rbm}{\right>^-_\mathcal{\pd}}
+\newcommand{\rb}{\right>_\mathcal{\pd}}
+\newcommand{\rbi}{\right>_{\partial\mathcal{D}_\mathrm{i}}}
+\newcommand{\nodo}{\vec{n}_1\cdot\ome}
+\newcommand{\ntdo}{\vec{n}_2\cdot\ome}
+\newcommand{\absnodo}{\left|\vec{n}_1\cdot\ome\right|}
+\newcommand{\absntdo}{\left|\vec{n}_2\cdot\ome\right|}
+
+\newcommand{\bs}{\mathbf{S}}
+\newcommand{\bl}{\mathbf{L}}
+\newcommand{\ba}{\mathbf{A}}
+\newcommand{\bst}{\Sigma_\mathrm{t}}
+\newcommand{\baz}{\mathbf{A}_\zeta}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\bmm}{\mathbf{M}^-}
+\newcommand{\vq}{\vec{Q}}
+\newcommand{\vphi}{\vec{\phi}}
+\newcommand{\vt}{\vec{v}}
+\newcommand{\qin}{q_\mathrm{inc}}
+
+\newcommand{\icm}{cm$^{-1}$}
+
+\newcommand{\quand}{\quad\mathrm{and}\quad}
+\newcommand{\pp}[1]{P$_{#1}$}
+
+%\newcommand{\vvv}[1]{\vec{\mkern0mu#1}}
+%\newcommand{\vvv}[1]{\vec{\mskip1mu#1}}
+\newcommand{\vvv}[1]{\vec{#1}}
+\newcommand{\pord}[2]{\phi_{#1}^{(#2)}}
+
+%\newcommand{\sb1}{\hat{\sigma}_\mathrm{b}}
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Accurate Least-Squares P$_N$\ Scaling based on Problem Optical Thickness for solving Neutron Transport Problems}%The Transient P$_N$\ (\tp{N})\ Model: an Accurate P$_N$~Closure for Radiation Transport}
+%\tnotetext[mytitlenote]{Fully documented templates are available in the elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
+
+%% Group authors per affiliation:
+\author[mymainaddress]{Weixiong Zheng\corref{mycorrespondingauthor}}
+\ead{zwxne2010@gmail.com}
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Elsevier Inc}
+%\ead[url]{www.elsevier.com}
+
+\author[mymainaddress]{Ryan G. McClarren}
+\cortext[mycorrespondingauthor]{Corresponding author}
+\ead{rgm@tamu.edu}
+\address[mymainaddress]{Texas A\&M Nuclear Engineering, 3133\ TAMU,~College Station, TX 77843-3133}
+\begin{abstract}
+	In this paper, we present an accurate and robust scaling operator based on material optical thickness (OT) for the least-squares spherical harmonics (LS\pn) method for solving neutron transport problems. LS\pn\ without proper scaling is known to be erroneous in highly scattering medium, if the optical thickness of the material is large. A previously presented scaling developed by Manteuffel, et al.\ does improve the accuracy of LS\pn\, in problems where the material is optically thick. With the method, however, essentially no scaling is applied in optically thin materials, which can lead to an erroneous solution with presence of highly scattering medium. Another scaling approach, called the reciprocal-removal (RR) scaled LS\pn,\ which is equivalent to the self-adjoint angular flux (SAAF)\ equation, has numerical issues in highly-scattering materials due to a singular weighting.  We propose a scaling based on optical thickness that improves the solution in optically thick media while avoiding the singularity  in the SAAF formulation.
+\end{abstract}
+
+\begin{keyword}
+	Least Square \pn,\ Neutron Transport Equation, Reactor Shielding, Optical Thickness, Scaling, Thick Diffusion Limit
+\end{keyword}
+
+\end{frontmatter}
+
+\end{document}
