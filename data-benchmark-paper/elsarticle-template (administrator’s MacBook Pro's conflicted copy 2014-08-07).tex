@@ -1,0 +1,119 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+
+\journal{Journal of \LaTeX\ Templates}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\zh}{ZrH$_x$}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Emulation Based Calibration for Parameters in Parameterised Phonon Spectrum of \zh}
+\tnotetext[mytitlenote]{Fully documented templates are available in the elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
+
+%% Group authors per affiliation:
+\author{Weixiong Zheng}
+\address{Nuclear Engineering, Texas A\&M University, College Station, TX 77843-3133}
+\fntext[myfootnote]{Since 1880.}
+
+%% or include affiliations in footnotes:
+\author[mymainaddress,mysecondaryaddress]{Elsevier Inc}
+\ead[url]{www.elsevier.com}
+
+\author[mysecondaryaddress]{Global Customer Service\corref{mycorrespondingauthor}}
+\cortext[mycorrespondingauthor]{Corresponding author}
+\ead{support@elsevier.com}
+
+\address[mymainaddress]{1600 John F Kennedy Boulevard, Philadelphia}
+\address[mysecondaryaddress]{360 Park Avenue South, New York}
+
+\begin{abstract}
+This template helps you to create a properly formatted \LaTeX\ manuscript.
+\end{abstract}
+
+\begin{keyword}
+Phonon spetrum(a)\sep Thermal neutron scattering\sep Emulation \sep Calibration\sep  BMARS\sep GPR
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+
+\paragraph{Installation} If the document class \emph{elsarticle} is not available on your computer, you can download and install the system package \emph{texlive-publishers} (Linux) or install the \LaTeX\ package \emph{elsarticle} using the package manager of your \TeX\ installation, which is typically \TeX\ Live or Mik\TeX.
+
+\paragraph{Usage} Once the package is properly installed, you can use the document class \emph{elsarticle} to create a manuscript. Please make sure that your manuscript follows the guidelines in the Guide for Authors of the relevant journal. It is not necessary to typeset your manuscript in exactly the same way as an article, unless you are submitting to a camera-ready copy (CRC) journal.
+
+\paragraph{Functionality} The Elsevier article class is based on the standard article class and supports almost all of the functionality of that class. In addition, it features commands and options to format the
+\begin{itemize}
+\item document style
+\item baselineskip
+\item front matter
+\item keywords and MSC codes
+\item theorems, definitions and proofs
+\item lables of enumerations
+\item citation style and labeling.
+\end{itemize}
+
+\section{Direct calibration}
+The intention of calibrating parameters for the PPS is such that we could build appropriate phonon spectra of \zh~and generate corresponding thermal neutron scattering cross sections used in TRIGA reactor simulations to present accurate results. 
+
+One possible way to accomplish the goal is to measure how close the simulation results (outputs) are to the target or experimental results and collect parameter sets based on the closeness. We name the measure ''scoring". The simulation results are made with scattering data propagated from PPS parameter space. If the score of a realization of simulation is high, which means the simulation results are close to the experimental or measured results, we collect the parameters where the corresponding thermal scattering data propagating from. The expectation is that the collection would form a subset/subsets of parameters in the parameter space such that simulation with \zh~thermal scattering data generated with those parameter subsets would be accurate compared with the measured or experimental results.
+
+MCNP generates QOIs as normal distributions informed by a mean and a standard deviation. If one assume the experimental results are also given in this form, the measure of closeness of the simulation QOIs to the experimental values could be defined as the overlaps between realization normal distributions and measured normal distributions, as illustrated in Figure. xxx (gauss figure needed). We, thereafter, compute the overlaps for all realization of simulations to archive the scores and project the scores into the PPS parameter space. We expected the ''spatial" distribution of the scores in the parameter space to indicate the subset(s) of parameters we need for our TRIGA reactor simulations. %Figure.~xxx (srho needed) is an example of projecting the scores with 
+
+As an example, in this article, we used ENDF-VII thermal scattering data of \zh~to running simulations and generate one set of QOIs as a surrogate of experimental results and the aim is to calibrate the parameters of PPS model for such ''experiment".
+
+For each type of QOI, we can estimate the ''spatial" distribution of the scores once, as the example of scoring with $\rho$~shown in Figure.~xxx (srho needed). Since previous study based on ANOVA and polynomial regression based cross-validation (ref ans and physor) showed only $b$~and $p$~are significant, in this study, all calibrations focus on these two parameters and the scores are only projected into the $b$-$p$~2D parameter space.
+
+Moreover, when scoring with multiple types of QOIs simultaneously, the multiplication of the score distributions would narrow the size of the parameter subset down. Figure.~xxx (sall needed) is made with scoring with $\rho$,~$\Lambda$~and $\alpha$~(explain???). It would be claimed that the possible appropriate $b$~is around $0.001$???~and $p$~is around $137$~meV.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Emulation based calibrations}
+The direct calibration presents scores with preference of the parameters as expected. However, it has the drawback that the high score region locates in the parameter space relatively randomly. Besides, since the shape of high score region is not regular, one would not easily generalize the exact parameter ranges. The insignificant region behaves as ''noise" around the preferred regions.
+
+Therefore, it is reasonable to develop methods to take over the calibration work with simultaneously regularizing the scoring distribution and filtering the ''noise" out.
+
+\subsection{Gaussian process regression}
+\subsection{BMARS based calibrations}
+
+\section{Conclusions and future work}
+\section*{References}
+
+\bibliography{mybibfile}
+
+\end{document}
