@@ -1,0 +1,268 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\usepackage{color}
+\usepackage{amsmath,amsfonts,amssymb}
+\modulolinenumbers[5]
+
+\journal{Journal of \LaTeX\ Templates}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\zh}{ZrH$_x$}
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\newcommand{\TAMU}{Texas A\&M University}
+\newcommand{\ddxcs}{\sigma(E'\to E,~\mu)}
+
+%\newcommand{\sb1}{\hat{\sigma}_\mathrm{b}}
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Emulation Based Calibration for Parameters in Parameterised Phonon Spectrum of \zh}
+%\tnotetext[mytitlenote]{Fully documented templates are available in the elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
+
+%% Group authors per affiliation:
+\author[mymainaddress]{Weixiong Zheng}
+\ead{zwxne2010@tamu.edu}
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Elsevier Inc}
+%\ead[url]{www.elsevier.com}
+
+\author[mymainaddress]{Ryan G. McClarren\corref{mycorrespondingauthor}}
+\cortext[mycorrespondingauthor]{Corresponding author}
+\ead{rgm@tamu.edu}
+
+\address[mymainaddress]{Nuclear Engineering, \TAMU,~College Station, TX 77843-3133}
+
+\begin{abstract}
+This template helps you to create a properly formatted \LaTeX\ manuscript.
+\end{abstract}
+
+\begin{keyword}
+Phonon spetrum(a)\sep Thermal neutron scattering\sep Uncertainty quantification \sep Calibration\sep BMARS\sep GPR
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+\subsection{Background and Motivation}
+TRIGA reactors, such as the one located at \TAMU,~use U-\zh~as fuel and make use of its good moderation. At thermal energies, the neutron scattering from \zh~is heavily affected by the phonon spectra of H and Zr in \zh,~which are associated with the solid structures of \zh.
+
+Current data, e.g.~ENDF, are based on the structure of ZrH$_2$.~However, former experiments strongly indicate that the solid structure of \zh~changes accompany with changes in H concentration, $x$.~And the different solid structure of \zh~would result in different phonon spectra of \zh,~which leads to different thermal scattering data and, thereafter, different reactor simulation results.
+
+Former researcher did work on figuring out the effects on phonon spectra brought by \zh~compositions and finding or establishing proper phonon spectra for some specific type of \zh.~For instance, Malik et al.~derived a three-Gaussian model for the optical mode of H spectrum and found an optimal sets of parameters constructing the optical mode fitting the experiments. Another example is Badea et al.~performed simulations on a TRIGA reactor with shifting peak positions of H spectrum of \zh~and observed effects on criticality calculations, which partially helps found the foundations of methodology and model construction in this work.
+
+The H concentration of \zh~at \TAMU~is referred as $1.523$, which would result in different phonon spectra from existing spectra. We therefore derived PPS models for phonon spectra of H and Zr in \zh based on Mattes's Debye-plus-Gaussian model for H in \zh,~inspired by its good agreement with experimental results and simple mathematical formula such that we could explore the effects introduced by varying parameters.
+
+The goal would be described as: given experimental results on a specific TRIGA reactor, surrogate or realistic, we develop methods to find a optimal set(s) of parameters constructing PPS model(s) such that the data generated with such model(s) would result in comparably accurate simulation results to the experiment(s)
+\subsection{Theory and previous work}
+\subsubsection*{Theory}
+In the \zh~bound system, the double differential scattering cross section at thermal energies can be given by:
+\begin{equation}
+\ddxcs=\frac{\hat{\sigma}_\mathrm{b}}{2kT}\sqrt{\frac{E}{E'}}S(\alpha,~\beta),
+\end{equation}
+where $E'$~and $E$~are the incident and secondary neutron energies and $\hat{\sigma}_\mathrm{b}$~is the characteristic scattering cross section of the bound system. The $S(\alpha,~\beta)$~is named thermal scattering law, where $\alpha$~and $\beta$~are defined by:
+\begin{equation}
+\alpha\equiv\frac{E+E'-2\mu\sqrt{EE'}}{AkT}\qquad\mathrm{and}\qquad\beta\equiv\frac{E-E'}{kT}.
+\end{equation}
+$\alpha$~and $\beta$~are the momentum and energy transfer, respectively. $A$~represents the ratio of the scatterer (such as H in \zh)~mass to neutron mass. The scattering law can be expressed as:
+\begin{equation}
+S(\alpha,~\beta)=\int\limits_{-\infty}^{\infty}e^{i\beta\hat{t}}e^{-\gamma(\hat{t})}d\hat{t},
+\end{equation}
+where $\hat{t}$ is a non-dimensional time which is measured by $\bar{h}/kT$.~$\gamma(\hat{t})$ is given by:
+\begin{equation}
+\gamma(\hat{t})=\alpha\int\limits_{-\infty}^{\infty}\frac{f(\beta)}{2\beta\sinh(\beta/2)}\left[1-e^{-i\beta\hat{t}}\right]e^{-\beta/2}d\beta,
+\end{equation}
+where $f(\beta)$~is the non-dimensional phonon spectrum of the bound system. The phonon spectrum then connects with the scattering law and scattering cross sections via Eq.~xxx,~xxx~and xxx. It contains all the information one needs to compute the scattering data. Therefore, specifying a phonon spectrum is equivalent to specifying a scattering law which associates with a specific set of scattering cross sections. This is also the standpoint of this type of UQ work.
+\subsubsection*{Work from former people}
+Historically, some models were proposed for spectra of \zh,~especially the optical mode of H spectrum. An overview of part of former work is as follows.
+
+Slaggie et al.~developed the ''centered force" model with the solid physics code GASKET for ZrH$_2$.~And this model is actually applied in ENDF library.~Also, in Ref.~xxx, he suggested simplify the H spectrum to be a Debye distribution peaking at $20$~meV plus a Gaussian distribution with a $FWHM$~of $20$~meV and a mean of $137$~meV. Also, the Zr is simplified to a Debye distribution locating at $20$~meV. Malik et al.~developed a three-Gaussian model for the optical mode of H spectrum specifically for ZrH$_{1.58}$. Evans et al.~derived the optical model H spectrum reversely from the measured $S(\alpha,~\beta)$~values.\footnote{One may refer to Ref.~xxx(glasstone) about the reverse derivation.} More recently, Mattes et al.~developed a new simplified model in which Zr is treated as free gas while H is made similar with Slaggie suggested Debye-plus-Gaussian model but with a different $FWHM$~of $28$~meV. We refer Mattes's model as to DG model in this article.
+
+\subsubsection*{Parameterized phonon spectra}
+
+Though DG model with such simple mathematical form lacks the details of the one from solid dynamics computations, multiple experimental evidences demonstrate the efficacy of such model. It is even said the DG model would work better than ENDF's model. We then, in recent work, developed parameterized phonon spectrum models (PPS) for both H and Zr in \zh.~The H spectrum is given by
+\begin{equation}\label{eq:ppsh}
+f(\omega)_\mathrm{H}=
+\begin{cases}
+\frac{3b}{2T_\mathrm{DH}^3}\omega^2 & \omega<T_\mathrm{DH}\\
+\frac{3b}{2T_\mathrm{DH}^3}(\omega-2T_\mathrm{DH})^2 & T_\mathrm{DH}\leq\omega\leq2T_\mathrm{DH}\\
+\frac{g(b)}{\sqrt{2\pi}\sigma}\exp\left[-\frac{(\omega-p)^2}{2\sigma^2}\right]& 2T_\mathrm{DH}\leq\omega\leq\omega_\mathrm{max, H}.\\
+\end{cases}
+\end{equation}
+And the Zr spectrum is give by:
+\begin{equation}\label{eq:ppsz}
+f(\omega)_\mathrm{Zr}=
+\begin{cases}
+\frac{r(1+c)}{T_\mathrm{DZr}^{1+c}}\omega^c & \omega<T_\mathrm{DZr}\\
+\frac{(1+c)r}{T_\mathrm{DZr}}\exp\left[\frac{(1+c)^r}{1-r}(1-\frac{\omega}{T_\mathrm{DZr}})\right] & T_\mathrm{DZr}\leq\omega\leq\omega_\mathrm{max, Zr}.\\
+\end{cases}
+\end{equation}
+Note that
+\begin{equation}
+\int\limits_{0}^{\infty}f(\omega)d\omega=\int\limits_{0}^{\infty}f(\beta)d\beta\text{\qquad and\qquad}\beta=\frac{E-E'}{kT}=\frac{\omega}{kT}\text{,}
+\end{equation}
+where $\omega$ is energy transfer in units of eV.
+
+In Eq.~\eqref{eq:ppsh} , $b$ is the branching ratio of the acoustic part with a range of $\left[1/361,~1/91\right]$;~$T_\mathrm{DH}$ is the Debye temperature of H in \zh~with a range of $\left[16,~24\right]$~meV;~$p$ is the peak position of optical peak with a range of $\left[127,~147\right]$~meV; $\sigma$, calculated from the $FWHM$ of the optical part with a range of $\left[25,~31\right]$~meV, is the standard deviation of the Gaussian distribution; the $g(b)$ is a function of $b$ and the normalization coefficient and $g(b)\approx 1-b$. In Eq.~\eqref{eq:ppsz}, $T_\mathrm{DZr}$ is the peak position of the spectrum in ranges of $\left[16,~24\right]$~meV; $c$ is the power of $\omega$ for the left side of peak in the range of $\left[2,~2.8\right]$;~$r$ is the ratio of the left part of the peak to the whole spectrum in ranges of $\left[0.4,~0.8\right]$.~In total, our parameterized spectra has seven parameters: $b$, $T_\mathrm{DH}$, $p$, $FWHM$, $T_\mathrm{DZr}$, $c$ and $r$.
+
+\subsubsection*{Overview of our previous and ongoing work}
+We uniformly sampled parameters over the seven dimensional input space by using Latin Hypercube sampling designs (LHS). Picking a sample combination will produce a unique PPS defined Eq.~xxx and~xxx.
+
+Initially, we employed LHS to produce $3000$~samples of parameter combinations, used NJOY to generate MCNP-compatible thermal data and invoked MCNP to do the criticality calculations on a TRIGA lattice geometry. In that work, an method combining ANOVA analysis with regression based cross validation was developed to investigate the sensitivity of QOIs to parameters and the interactions between the parameters. the reactivity $\rho$~was then found to be sensitive the $b$~and $p$~mentioned in Eq.~xxx~and~xxx. We referred them as to two main parameters.
+
+We extended the investigations to full-core TRIGA geometry with a new and effective sampling strategy which separately sampled the two parameters together from the other five parameters. And with the ANOVA-cross-validation technique developed before, we found mean neutron generation time $\Lambda$~and fuel temperature coefficient $\alpha$,~besides reactivity, to be sensitive to the main parameters. Furthermore, we ran simulations with ENDF-VII thermal scattering data of \zh~as a surrogate of experiment and we developed a method to calibrate proper parameter sets which would propagate through the data generating and MCNP simulations to comparable simulation results with surrogate experimental results, which will be discussed in following sections.
+
+In this paper, we developed the calibration framework with emulators. Bayesian multivariate adaptive regression splines (BMARS) and Gaussian process regression (GPR) are introduced to use inputs and corresponding simulation outputs to train models and predict on modeler-defined parameter mesh points. Then we calibrate the parameters with both the original calibration method and emulation based methods, predictions of which are informed by probability distributions and calibrate the parameters. Then we ran samplings over calibrated parameter ranges and regenerate data using NJOY and re-invoke MCNP to run simulations for testing this calibration results.
+%
+%\paragraph{Installation} If the document class \emph{elsarticle} is not available on your computer, you can download and install the system package \emph{texlive-publishers} (Linux) or install the \LaTeX\ package \emph{elsarticle} using the package manager of your \TeX\ installation, which is typically \TeX\ Live or Mik\TeX.
+%
+%\paragraph{Usage} Once the package is properly installed, you can use the document class \emph{elsarticle} to create a manuscript. Please make sure that your manuscript follows the guidelines in the Guide for Authors of the relevant journal. It is not necessary to typeset your manuscript in exactly the same way as an article, unless you are submitting to a camera-ready copy (CRC) journal.
+%
+%\paragraph{Functionality} The Elsevier article class is based on the standard article class and supports almost all of the functionality of that class. In addition, it features commands and options to format the
+%\begin{itemize}
+%\item document style
+%\item baselineskip
+%\item front matter
+%\item keywords and MSC codes
+%\item theorems, definitions and proofs
+%\item lables of enumerations
+%\item citation style and labeling.
+%\end{itemize}
+
+\section{Description of the ''experiment", the simulations and the framework}
+We ran simulations with ENDF-VII thermal data for \zh~as a surrogate of a real experiment.~The QOIs generated from the ''experimental" simulations could be treated as experimental results.
+
+The simulations are with the full core configuration of the TRIGA reactor at 
+\TAMU.~The geometry, specifically the shim safety rod positions, is set to make the reactor to be about critical for $600$~K fuel temperature. We ran $250$~MCNP simulations under this condition. In addition, another $250$~runs were taken with the same geometrical configuration but a different fuel temperature at $293.6$~K to explore the temperature effects. In every single case of all criticality calculations, $7.5\e{7}$~particles were used in total with which the standard deviation of the $k_\mathrm{eff}$~is around $10$~pcm.
+
+The basic framework of this type of UQ work is shown in Figure.~xxx (flow chart needed). From Step~1~through~4,~the PPS parameters are sampled via Latin Hypercube sampling and propagate through phonon spectra synthesizing and data generating to simulation results. In Step~5,~the modeler needs to calibrate plausible PPS parameter values (or value sets) with QOIs generated in Step~4.~We also need one more step for testing the calibrated PPS parameters.
+
+In this article, we introduce several calibration techniques applied in Step~5.~The performances of the techniques will be compared and shown in the following sections.
+
+%Previous work indicates that the reactivity $\rho$,~the neutron mean generation time $\Lambda$~and the fuel temperature coefficient $\alpha$~are sensitive to parameter variations.(cite physor and ans?) 
+
+\section{Direct calibration}
+By calibration, one could accomplish the goal via measuring how close the simulation results (outputs) are to the target or experimental results and collecting parameter sets with which the simulation results are close to the experiment. We name the measure process ''scoring". The simulation results are made with scattering data propagated from PPS parameter space. If the score of a realization of simulation is high, which means the simulation result is close to the experimental or measured result, we collect corresponding parameter values. The expectation is that the collection from all high-score realizations could form a subset/subsets of parameters in the parameter space such that simulation with \zh~thermal scattering data generated with those parameter subsets would be accurate compared with the measured or experimental results.
+
+We developed methods to compute the scores. MCNP generates QOIs as normal distributions informed by a mean and a standard deviation. Assuming the experimental results are also given in this form\footnote{Surrogate experiment performed in MCNP naturally suits this assumption.}, then the socre could be defined as the overlaps between realization and measured normal distributions, as the example illustrated in Figure. xxx (gauss figure needed). In the example, two Gaussian distributions intersect with each other and the shadow part is the overlap. We, thereafter, analytically compute the overlaps for all realization of simulations to archive the scores and project the scores into the PPS parameter space.
+
+We expected the ''spatial" distribution of the scores in the parameter space indicates preferences. Those preferred region would contain the interested subsets the modeler heads for. %Figure.~xxx (srho needed) is an example of projecting the scores with 
+
+For each type of QOI, we can estimate the ''spatial" distribution of the scores once. Figure.~xxx (srho needed) is the example of scoring with the reactivity $\rho$.~Since previous study based on ANOVA and polynomial regression based cross-validation (ref ans and physor) showed only $b$~and $p$~are significant, in this study, all calibrations focus on these two parameters and the scores are only projected into the $b$-$p$~2D parameter space\footnote{ANOVA and cross-validation explanation needed. Interested readers may refer to Ref.~xxx}.
+
+Moreover, when scoring with multiple types of QOIs simultaneously, the multiplication of the score distributions would narrow the size of the parameter subset down. The limit of the subset(s) should be a point(s) located in the input space. Figure.~xxx (sall needed) is made with scoring with $\rho$,~$\Lambda$~and $\alpha$~(explain???). It would be claimed that the possible appropriate $b$~is around $0.001$???~and $p$~is around $137$~meV.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Emulation based calibrations}
+The direct calibration presents scores with preference of the parameters as expected. However, it has the drawback that the high score region locates in the parameter space relatively randomly. Besides, since the shape of high score region is not regular, one would not easily generalize the exact preferred parameter ranges. The insignificant region behaves as ''noise" around the preferred regions.
+The intuitive way to avoid this would be to increase the sample numbers of the parameter combinations and generate that many sets of scattering data to run MCNP simulations and gain smoother and more continuous score distributions. However, the expense could be huge to archive the goal.
+
+Therefore, it is reasonable to develop methods to take over the calibration work. The methods should be able to smoothen the score distribution and filter the ''noise" out and must be computationally affordable.
+
+The alternative idea is to emulate the process given current inputs of parameters and outputs from limited numbers of simulations. Assuming the inputs $X$~and simulation outputs $Y_\mathrm{i}$\footnote{Note that the subscript i of $Y_\mathrm{i}$~represents different types of simulated QOIs.} are subject to nonlinear relationships hidden in the black box, we want to establish a emulation model for the mapping $f:X\mapsto R$ such that
+\begin{equation}
+Y_\mathrm{i}=f(X)+\epsilon_\mathrm{i},~X\in D
+\end{equation}
+where $\epsilon_\mathrm{i}$~is a random error with zero mean and $D$~is the parameter inpu. Moreover,given inputs, we also expect the emulators to generate outputs informed by probabilistic distributions, with which we could apply the scoring strategy developed for direct calibration. Some Bayesian inferred emulators hold these properties. Candidates in this work are Gaussian process regression (GPR) and Bayesian multivariate adaptive regression splines (BMARS) inspired by the their good performances applied in engineered systems in McClarren.~et al's work.(cite PIE).
+\subsection{Gaussian process regression}
+Gaussian process regression generates distributions of functions (emulation outputs) which interpolates the real output data in the training dataset. A Gaussian process (GP) is a collection of random variables. Any subsets of such collection has a joint Gaussian distribution. GP defines the mapping from the inputs to the outputs, i.e.~$f:X\mapsto R$,~to be fully specified by a mean function $\mu(X)$~and a covariance function $k(X,X')$:
+\begin{equation}
+f(X)\sim GP(\mu(X),k(X,X'))
+\end{equation}
+\begin{equation}
+k(X_\mathrm{i},X_\mathrm{j})=\sigma_\mathrm{n}^2\exp\left\{-\frac{1}{2}\sum\limits_{\mathrm{m}=1}^{\mathrm{M}}\frac{\left(X_\mathrm{i,m}-X_\mathrm{j,m}\right)^2}{l_\mathrm{m}^2}\right\}+\delta_\mathrm{i,j}\epsilon^2
+\end{equation}
+Then the covariance matrix can be calculated by:
+\begin{equation}
+K_{\mathrm{ij}}=k(X_\mathrm{i},X_\mathrm{j})
+\end{equation}
+With the constructed covariance matrix, the GPR emulated outputs is subject to normal distribution, i.e.
+\begin{equation}
+y_{\mathrm{GPR}}\sim N(\mu(X),K)
+\end{equation}
+
+Denote $X$,~$f$,~$X^*$~and $f^*$~are the training set inputs, known function values for training (which is the simulated QOIs in our case), modeler-defined input values and predictions at the input points (or point sets for multi-D cases) from GPR, model of which is gained with the training set, respectively. One would formulate to associate the predictions with the training sets by:
+\begin{equation}
+\left[\begin{array}{c}
+f\\
+f^*
+\end{array}\right]\sim N\left(\left[\begin{array}{c}
+\mu\\\mu^*
+\end{array}\right],\left[\begin{array}{cc}
+K & K^*\\
+{K^*}^\top & K^{**}
+\end{array}\right]\right),
+\end{equation}
+where $K_{\mathrm{ij}}=k(X_\mathrm{i},X_\mathrm{j}),~K^*_{\mathrm{ij}}=k(X^*_\mathrm{i},X_\mathrm{j})~\mathrm{and}~K^{**}_{\mathrm{ij}}=k(X^*_\mathrm{i},X^*_\mathrm{j})$.
+\subsection{Baysian Multivariate Adaptive Regression Splines (BMARS)}
+For this paper, we choose BMARS as a candidate emulator as well as GPR. The BMARS arose originally from multivariate adaptive regression splines (MARS) developed by Friedman. The MARS is a curve-fitting technique which emulates the relationship between the inputs and outputs as a summation of spline functions at different orders(cite hayes, friedman). In 1D case, the spline functions are defined to be continuous and polynomial functions at some order on part of the domain and zero otherwise. Multivariate splines are simply multiplications of 1D spline functions(cite hayes). MARS linearly combines those splines to construct bases functions. Eq.~xxx~shows an example of basis function:
+\begin{equation}
+B_\mathrm{i}(X)=
+\begin{cases}
+1 & \mathrm{i}=0\\
+\prod\limits_{\mathrm{j}=1}^{\mathrm{J_i}}(X_{\mathrm{i}}-t_{\mathrm{j,i}})_+^{r_\mathrm{i}} & \mathrm{i}=1,2,...
+\end{cases}
+\end{equation}
+where $X$~is the 
+
+Then with those basis functions, the MARS estimated $f$~can be expressed by:
+\begin{equation}
+f(X)=\sum\limits_{\mathrm{i}=0}^{\mathrm{I}}\beta_\mathrm{i}B_\mathrm{i}(X)
+\end{equation}
+\textcolor{red}{show a bunch of emulations projected into 1D main factor spaces}
+\subsection{Emulation based calibration}
+The whole framework would not change for this UQ work. The only thing changed is the method we apply in Step~5~for calibration. Instead of direct calibration, we used emulators to train the simulation inputs and outputs to gain models. With modeler defined inputs, emulators generate corresponding outputs. Then, we can score the emulated results and project them onto the defined input meshes.
+\subsection{Calibration implementations}
+Since GPR generates predictions informed by normal distribution, fortunately, the scoring algorithm developed for direct calibration could directly be applied to GPR emulated results (see Figure.~xxx).
+
+However, BMARS emulated results, which are not subject to normal distributions, disable the application of the original scoring strategy. This drives us to develop an alternative method. Since BMARS generate a bunch of draws from distributions as shown in Figure.~xxx(bmars example needed), somewhat similar with GPR's distributed results, it is natural to come up with generating an discrete probability distribution (histogram) with those draws and then share the idea of calculating overlaps between the realization distribution and the experimental or measured distribution. Figure.~xxx (bmars scoring example needed) is an example for scoring in such way. One of benefits is that the modeler needs neither to know the analytical form of the emulation distribution nor to assume the BMARS emulation results to be Gaussian, which theoretically would not hold.\footnote{Such assumption would be wrong, though, it actually worked quite well as a compromise of using original scoring algorithm.}
+\subsection{GPR based calibration results}
+Figure.~xxx~is the calibration result with GPR emulator. Unlike direct calibrations, calibrating with emulated QOIs generate smooth and continuous scoring results. Also, the score distribution is much flatter. However, qualitatively, the high score region still stay around the similar region as direct calibrations, which confides one with such GPR emulated calibration framework.
+\subsection{BMARS based calibration results}
+As the calibration results shown in Figure.~xxx (BMARS cal needed), although the high-scored region has different shape as GPR calibrated result as the high-score region more densely distributes, BMARS distributes around the high-score region indicated by directly calibration as GPR. The shape of the BMARS scoring result is irregular compared with GPR. One reasonable hypothesis based on observations is BMARS would possibly capture outliers which forms the irregularity. 
+\section{Tests for emulation calibrated parameters}
+The idea of this type of UQ work is to calibrate proper parameter values applying in thermal scattering data generation such that simulation results with such data could be accurate. We scored the QOIs and showed the scores projected onto $b$-$p$~plane. Though the score distributions have ''spatial" preferences in such 2D subspace, it is still critical to prove the preferred parameter subsets could propagate through the simulations and lead to accurate simulation results.
+
+And one important observation is that all of these calibration strategy, including the direct calibration, indicate a branching ratio around $0.01$.~However, the phonon spectrum of H in \zh~used in ENDF, which is suggested by Slaggie (ref slaggie), indicate a value of $1/241$.~
+
+On purpose of testing the performance of high-score parameter subsets, we sampled over interested subsets. The acceptance-rejection sampling technique was applied over the two main parameters with the restriction of $0.7$~or more times the highest score.(xxx it is wired to say this). Meanwhile, we still sample uniformly over the other five parameters with LHS. Then following the protocol (xxx develop one in this paper) described in Section.~xxx, MCNP generates simulation results for testing analyses finally.
+
+Figure.~xxx through xxx show the comparisons of all types of QOIs with data using uncalibrated (prior) parameters and calibrated (posterior) parameters. One observation is that the calibration shrinks the QOI distributions and statistically makes simulation results closer to the ''experimental" results.
+\section{Conclusions and future work}
+\section*{References}
+
+\bibliography{mybibfile}
+
+\end{document}
