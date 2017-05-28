@@ -1,0 +1,1 @@
+This is an article we published based upon Yaqi Wang's results and my internship results on SN-PN hybridation. The article is published in Progress of Nuclear Energy (click [here](http://www.sciencedirect.com/science/article/pii/S0149197017300653)).
